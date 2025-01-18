@@ -1,200 +1,103 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Linux | T1ng的摆烂日常</title>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="T1ng"><meta name="renderer" content="webkit"><meta name="copyright" content="T1ng"><meta name="keywords" content="T1ng的摆烂日常"><meta name="description" content=""><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Linux · T1ng's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/t1ng.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
+  "use strict";
+  // rel=preload support test
+  if( !w.loadCSS ){
+    w.loadCSS = function(){};
+  }
+  // define on the loadCSS obj
+  var rp = loadCSS.relpreload = {};
+  // rel=preload feature support test
+  // runs once and returns a function for compat purposes
+  rp.support = (function(){
+    var ret;
+    try {
+      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+    } catch (e) {
+      ret = false;
+    }
+    return function(){
+      return ret;
+    };
+  })();
 
-  <!-- keywords -->
-  
+  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+  // then change that media back to its intended value on load
+  rp.bindMediaToggle = function( link ){
+    // remember existing media attr for ultimate state, or default to 'all'
+    var finalMedia = link.media || "all";
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Linux基础Linux基础知识">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Linux">
-<meta property="og:url" content="http://example.com/2024/11/29/Linux/index.html">
-<meta property="og:site_name" content="T1ng的摆烂日常">
-<meta property="og:description" content="Linux基础Linux基础知识">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-11-29T00:36:30.000Z">
-<meta property="article:modified_time" content="2024-11-29T00:38:55.000Z">
-<meta property="article:author" content="T1ng">
-<meta property="article:tag" content="Linux">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternative" href="/atom.xml" title="T1ng的摆烂日常" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/img/t1ng.ico">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+    function enableStylesheet(){
+      link.media = finalMedia;
+    }
 
-  
-  
+    // bind load handlers to enable media
+    if( link.addEventListener ){
+      link.addEventListener( "load", enableStylesheet );
+    } else if( link.attachEvent ){
+      link.attachEvent( "onload", enableStylesheet );
+    }
 
-  
-<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+    // Set rel and non-applicable media type to start an async request
+    // note: timeout allows this to happen async to let rendering continue in IE
+    setTimeout(function(){
+      link.rel = "stylesheet";
+      link.media = "only x";
+    });
+    // also enable media after 3 seconds,
+    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+    setTimeout( enableStylesheet, 3000 );
+  };
 
-  
-<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  // loop through link elements in DOM
+  rp.poly = function(){
+    // double check this to prevent external calls from running
+    if( rp.support() ){
+      return;
+    }
+    var links = w.document.getElementsByTagName( "link" );
+    for( var i = 0; i < links.length; i++ ){
+      var link = links[ i ];
+      // qualify links to those with rel=preload and as=style attrs
+      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+        // prevent rerunning on link
+        link.setAttribute( "data-loadcss", true );
+        // bind listeners to toggle media back
+        rp.bindMediaToggle( link );
+      }
+    }
+  };
+
+  // if unsupported, run the polyfill
+  if( !rp.support() ){
+    // run once at least
+    rp.poly();
+
+    // rerun poly on an interval until onload
+    var run = w.setInterval( rp.poly, 500 );
+    if( w.addEventListener ){
+      w.addEventListener( "load", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    } else if( w.attachEvent ){
+      w.attachEvent( "onload", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    }
+  }
 
 
-  
-<meta name="generator" content="Hexo 7.3.0"></head>
-<body>
-  <div id="container">
-    <div id="particles-js"></div>
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-				<img lazy-src="/img/t1ng.png" class="js-avatar">
-			
-		</a>
-
-		<hgroup>
-			<h1 class="header-author"><a href="/">T1ng</a></h1>
-		</hgroup>
-
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">Home</a></li>
-				        
-							<li><a href="/archives">Archives</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="half-header-menu">
-						<a class="hide">Home</a>
-						<a>Tags</a>
-						<a>Links</a>
-						<a>About</a>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="mail" target="_blank" href="/2564767047@qq.com" title="mail">mail</a>
-					        
-						</div>
-						<!-- music -->
-						
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Code/" style="font-size: 20px;">Code</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Race/" style="font-size: 20px;">Race</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a>
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-				
-				<section class="switch-part switch-part4">
-				
-					<div id="js-aboutme">一个CTFer菜鸡</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>				
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide"></h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="/img/t1ng.png" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author"></h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">Home</a></li>
-		        
-					<li><a href="/archives">Archives</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="mail" target="_blank" href="/2564767047@qq.com" title="mail">mail</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-      <div class="body-wrap"><article id="post-Linux" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2024/11/29/Linux/" class="article-date">
-  	<time datetime="2024-11-29T00:36:30.000Z" itemprop="datePublished">2024-11-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Linux
-      
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-	</div>
-
-        
-
-        
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1><span id="linux基础">Linux基础</span></h1><h3><span id="linux基础知识">Linux基础知识</span></h3><span id="more"></span>
+  // commonjs
+  if( typeof exports !== "undefined" ){
+    exports.loadCSS = loadCSS;
+  }
+  else {
+    w.loadCSS = loadCSS;
+  }
+}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 7.3.0"></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/t1ng.png"></div><!--.profile-saying
+  i.fa.fa-comment
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">T1ng</div><div class="friends"><div>FRIENDS</div><span><a href="//github.com/Longlongyu" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span><span><a href="//github.com/" target="_black">friendD</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">T1ng's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">Linux</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2024-11-29</span></span><span class="post-intro-tags"><a class="intro-tag fa fa-tag" href="javascript:void(0)" date-tags="Linux"> Linux</a></span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h1><span id="linux基础">Linux基础</span></h1><h3><span id="linux基础知识">Linux基础知识</span></h3><span id="more"></span>
 
 <h4><span id="第一部分">第一部分</span></h4><p>echo    输出我们提供的任何文本<br>whoami    找出我们当前以哪个用户身份登录<br>想要输出文本“ <strong>TryHackMe</strong> ”，我们的命令是什么：echo TryHackMe</p>
 <p>ls    清单<br>cd    进入&#x2F;更改目录<br>cat    连接&#x2F;列出文件内容<br>pwd    打印工作目录</p>
@@ -206,8 +109,8 @@
 <p>公用目录<br>&#x2F;etc    存储操作系统使用的系统文件的常用位置。<br>&#x2F;var    存储系统上运行的服务或应用程序经常访问或写入的数据。<br>&#x2F;root    是“root”系统用户的家。<br>&#x2F;tmp    目录是“临时”的缩写，它是易失性的，用于存储只需要访问一两次的数据。与计算机上的内存类似，一旦计算机重新启动，此文件夹的内容就会被清除。进行渗透测试来说，任何用户默认都可以写入此文件夹。</p>
 <h4><span id="第三部分">第三部分</span></h4><p>vim nano<br>Wget（下载文件）<br>此命令允许我们通过 HTTP 从 Web 下载文件——就像您在浏览器中访问文件一样。我们只需提供要下载的资源的地址即可    wget <a target="_blank" rel="noopener" href="https://assets.tryhackme.com/additional/linux-fundamentals/part3/myfile.txt">https://assets.tryhackme.com/additional/linux-fundamentals/part3/myfile.txt</a></p>
 <p>从主机传输文件 - SCP（SSH）</p>
-<p>远程系统的 IP 地址192.168.1.30    远程系统上的用户Ubuntu    本地系统上的文件名称important.txt     希望在远程系统上存储文件的名称 transferred.txt<br>将示例文件从我们的机器复制到远程机器 scp important.txt <a href="mailto:&#x75;&#x62;&#x75;&#110;&#x74;&#x75;&#x40;&#49;&#x39;&#x32;&#46;&#49;&#x36;&#x38;&#46;&#49;&#46;&#51;&#48;">&#x75;&#x62;&#x75;&#110;&#x74;&#x75;&#x40;&#49;&#x39;&#x32;&#46;&#49;&#x36;&#x38;&#46;&#49;&#46;&#51;&#48;</a>:&#x2F;home&#x2F;ubuntu&#x2F;transferred.txt</p>
-<p>远程系统的 IP 地址192.168.1.30    远程系统上的用户Ubuntu    远程系统上的文件名称documents.txt    希望在系统上存储文件的名称notes.txt<br>用于从未登录的远程计算机复制文件 的语法    scp <a href="mailto:&#117;&#x62;&#117;&#110;&#116;&#117;&#x40;&#49;&#57;&#50;&#46;&#49;&#54;&#56;&#46;&#49;&#46;&#x33;&#48;">&#117;&#x62;&#117;&#110;&#116;&#117;&#x40;&#49;&#57;&#50;&#46;&#49;&#54;&#56;&#46;&#49;&#46;&#x33;&#48;</a>:&#x2F;home&#x2F;ubuntu&#x2F;documents.txt notes.txt</p>
+<p>远程系统的 IP 地址192.168.1.30    远程系统上的用户Ubuntu    本地系统上的文件名称important.txt     希望在远程系统上存储文件的名称 transferred.txt<br>将示例文件从我们的机器复制到远程机器 scp important.txt <a href="mailto:&#117;&#x62;&#x75;&#x6e;&#116;&#117;&#64;&#x31;&#57;&#x32;&#x2e;&#49;&#x36;&#56;&#46;&#49;&#x2e;&#51;&#48;">&#117;&#x62;&#x75;&#x6e;&#116;&#117;&#64;&#x31;&#57;&#x32;&#x2e;&#49;&#x36;&#56;&#46;&#49;&#x2e;&#51;&#48;</a>:&#x2F;home&#x2F;ubuntu&#x2F;transferred.txt</p>
+<p>远程系统的 IP 地址192.168.1.30    远程系统上的用户Ubuntu    远程系统上的文件名称documents.txt    希望在系统上存储文件的名称notes.txt<br>用于从未登录的远程计算机复制文件 的语法    scp <a href="mailto:&#117;&#x62;&#x75;&#110;&#x74;&#x75;&#64;&#x31;&#x39;&#x32;&#x2e;&#49;&#x36;&#56;&#46;&#49;&#46;&#x33;&#x30;">&#117;&#x62;&#x75;&#110;&#x74;&#x75;&#64;&#x31;&#x39;&#x32;&#x2e;&#49;&#x36;&#56;&#46;&#49;&#46;&#x33;&#x30;</a>:&#x2F;home&#x2F;ubuntu&#x2F;documents.txt notes.txt</p>
 <p>ps查看进程<br>要终止 PID 1337，我们将使用<code>kill 1337</code><br>让进程&#x2F;服务在启动时启动  systemctl [option] [service] [service]<br>option:Star ,Stop ,Enable ,Disable</p>
 <p>cron进程<br>Crontab 是在启动期间启动的进程之一，负责促进和管理 cron 作业。<br>crontab 需要 6 个特定值：<br>MIN    在什么时候执行<br>HOUR    什么时间执行<br>DOM    在每月的哪一天执行<br>MON    在一年中的哪个月执行<br>DOW    在星期几执行<br>CMD    将要执行的实际命令<br>以备份文件为例。您可能希望每 12 小时备份一次“cmnatic”的“文档”。我们将使用以下格式：<br>0 *&#x2F;12 * * * cp -R &#x2F;home&#x2F;cmnatic&#x2F;Documents &#x2F;var&#x2F;backups&#x2F;<br>不关心它在哪月、哪日或哪年执行 — — 只关心它每 12 小时执行一次，我们只需放置一个星号即可</p>
 <p>包管理apt<br>下载GPG密钥并使用 apt-key 来信任它wget -qO - <a target="_blank" rel="noopener" href="https://download.sublimetext.com/sublimehq-pub.gpg">https://download.sublimetext.com/sublimehq-pub.gpg</a> | sudo apt-key add -<br>更新 apt 以识别此新条目apt update。继续安装我们信任并添加到 apt 的软件，使用 <code>apt install sublime-text</code><br>删除软件包就像逆向操作一样简单。这个过程可以通过使用命令<code>add-apt-repository --remove ppa:PPA_Name/ppa</code>或手动删除我们之前添加的文件来完成。删除后，我们只需使用<code>apt remove [software-name-here]</code>ie<code>apt remove sublime-text</code></p>
@@ -219,79 +122,4 @@
 <li>访问日志</li>
 <li>错误日志</li>
 </ul>
-
-      
-    </div>
-    
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2024/12/02/nmap/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          Nmap
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2024/11/29/Go/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Go</div>
-      <strong class="article-nav-caption">&gt;</strong>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-
-
-
-
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2024 T1ng
-      </div>
-        <div class="footer-right">
-          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
-        </div>
-    </div>
-  </div>
-</footer>
-    </div>
-    
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-
-
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: false,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
-
-<script src="/js/main.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://example.com">T1ng</a></p><p> <span>Link:  </span><a href="http://example.com/2024/11/29/Linux/">http://example.com/2024/11/29/Linux/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><a class="prevSlogan" href="/2024/12/02/nmap/" title="Nmap"><span>< PreviousPost</span><br><span class="prevTitle">Nmap</span></a><a class="nextSlogan" href="/2024/11/29/Go/" title="Go"><span>NextPost ></span><br><span class="nextTitle">Go</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span> | theme </span><a target="_blank" rel="noopener" href="https://github.com/Longlongyu/hexo-theme-Cxo"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Linux基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.0.1.</span> <span class="toc-text">Linux基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">第一部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">第二部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">第三部分</span></a></li></ol></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
