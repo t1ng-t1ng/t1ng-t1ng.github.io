@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>第一章 应急响应-webshell查杀 | T1ng的摆烂日常</title>
+    
+    
+        <meta property="og:site_name" content="T1ng的摆烂日常">
+    
+    
+        <meta property="article:author" content="T1ng">
+    
+    
+        <link rel="icon" href="/img/t1ng.ico">
+    
+    
+<link rel="stylesheet" href="/css/minireset.min.css">
+
+    
+<link rel="stylesheet" href="/css/all.min.css">
+
+    
+<link rel="stylesheet" href="/css/csshake.min.css">
+
+    
+<link rel="stylesheet" href="/css/hljs/lioshi.css">
+
+    
+<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+
+    
+<link rel="stylesheet" href="/styl/main.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/highlight.min.js"></script>
+
+    
+<script src="/js/jquery.fancybox.min.js"></script>
+
+    
+<script src="/js/clipboard.min.js"></script>
+
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <header>
+  <div class="outer">
+    <div class="inner">
+      <h1 class="logo-wrap">
+        <a>T1ng的摆烂日常<b><sup></sup></b></a>
+      </h1>
+    </div>
+    <div class="inner">
+      <nav class="main-nav">
+        
+          
+            <a href="/">首页</a>
+          
+        
+          
+            <a href="/archives">归档</a>
+          
+        
+          
+            <a href="/categories">分类</a>
+          
+        
+          
+            <a href="/tags">标签</a>
+          
+        
+          
+            <a href="/friends">友链</a>
+          
+        
+          
+            <div class="dropdown">
+              <a class="dropbtn">相关链接</a>
+              <div class="dropdown-content">
+                
+              </div>
+            </div>
+          
+        
+          
+            <a href="/about">关于</a>
+          
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="content">
+        <section class="outer">
+    <article>
+        <div class="article-title">
+    <h2>
+        <a href="/2025/02/27/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-webshell%E6%9F%A5%E6%9D%80/" class="shake shake-little" title="第一章 应急响应-webshell查杀">
+            
+            第一章 应急响应-webshell查杀
+        </a>
+    </h2>
+    <div class="meta_box">
+    
+        
+        
+            
+                
+        
+        <div class="meta meta_auth">
+            <img src="/img/t1ng.png" alt="head" />
+            <p>t1ng</p>
+        </div>
+    
+        
+        
+        <div class="meta meta_date">
+            <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+            <p>发布于：2025年02月27日</p>
+        </div>
+    
+        <div class="meta meta_update">
+            <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+            <p>更新于：2025年02月27日</p>
+        </div>
+    </div>
+    
+  <div class="post_tags">
+    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%84%E6%9C%BA/" rel="tag"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>玄机</a></li></ul>
+  </div>
+
+
+</div>
+
+        <hr>
+        <div class="article-entry">
+            
+            
+            
+            <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">靶机账号密码 root xjwebshell</span><br><span class="line">1.黑客webshell里面的flag flag&#123;xxxxx-xxxx-xxxx-xxxx-xxxx&#125;</span><br><span class="line">2.黑客使用的什么工具的shell github地址的md5 flag&#123;md5&#125;</span><br><span class="line">3.黑客隐藏shell的完整路径的md5 flag&#123;md5&#125; 注 : /xxx/xxx/xxx/xxx/xxx.xxx</span><br><span class="line">4.黑客免杀马完整路径 md5 flag&#123;md5&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ssh连接，尝试手动查询<br>进入&#x2F;var&#x2F;www&#x2F;html目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www/html</span><br></pre></td></tr></table></figure>
+
+<p>由于查询内容为webshell，所以文件后缀为.php，文件中应该会有eval()函数，构造命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name &quot;*.php&quot; | xargs grep &quot;eval&quot;</span><br></pre></td></tr></table></figure>
+
+<p>xargs命令通常与管道命令一起使用。例如，可以使用_find_命令查找文件，然后使用xargs将查找到的文件列表作为_rm_或其他命令的参数。<br><img src="/2025/02/27/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-webshell%E6%9F%A5%E6%9D%80/0fa1997e24682dec374fd848d022171f.png"><br>发现所给的三个文件中都符合要求，逐个排查<br><img src="/2025/02/27/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-webshell%E6%9F%A5%E6%9D%80/4204d5540267a93314f360b10b9206ca.png"><br>在gz.php中找到了第一问flag<br>1：flag{027ccd04-5065-48b6-a32d-77c704a5e26d}<br>还是这个文件，其中有一个key值<br><img src="/2025/02/27/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-webshell%E6%9F%A5%E6%9D%80/e25778c19b15f3a48605b282108c8a2b.png"><br>具体代表什么不清楚，尝试进行搜索<br><img src="/2025/02/27/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-webshell%E6%9F%A5%E6%9D%80/adcf48b5aa32511ccd38726464ee62da.png"><br>发现是哥斯拉，所以找到哥斯拉在github的地址（<a target="_blank" rel="noopener" href="https://github.com/BeichenDream/Godzilla">BeichenDream&#x2F;Godzilla: 哥斯拉</a>）进行md5得到第二问结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -n &quot;https://github.com/BeichenDream/Godzilla&quot; |md5sum |cut -d &quot; &quot; -f1</span><br></pre></td></tr></table></figure>
+
+<p>2：flag{39392de3218c333f794befef07ac9257}<br>接下来继续分析剩下的可疑文件，<br><img src="/2025/02/27/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-webshell%E6%9F%A5%E6%9D%80/5d337ffd3267617fa14d315dedcbdd6c.png"><br>发现在<code>ls</code>时，<code>.Mysqli.php</code>文件并没有显示，<code>ls -lah</code>命令显示出了隐藏文件。所以隐藏的Shell的路径为<code>/var/www/html/include/Db/.Mysqli.php</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -n &quot;/var/www/html/include/Db/.Mysqli.php&quot; |md5sum |cut -d &quot; &quot; -f1</span><br></pre></td></tr></table></figure>
+
+<p>3：flag{aebac0e58cd6c5fad1695ee4d1ac1919}</p>
+<p>最后一个查找免杀码的完整路径。首先先了解一下PHP免杀一般的手段，字符串异或、base、rot13等。对base编码进行查找</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name &quot;*.php&quot; | xargs grep &quot;base64&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/02/27/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-webshell%E6%9F%A5%E6%9D%80/029ce49952797a1b5d469506cbee1e8b.png"><br>根据路径，md5，拿到flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -n &quot;/var/www/html/wap/top.php&quot; |md5sum |cut -d &quot; &quot; -f1</span><br></pre></td></tr></table></figure>
+
+<p>4：flag{eeff2eabfd9b7a6d26fc1a53d3f7d1de}</p>
+
+            <div class="article-copyright">
+                
+
+            </div>
+        </div>
+    </article>
+    
+
+
+</section>
+    </div>
+    <footer>
+    <div class="outer">
+        <div class="inner">
+            Powered by <a href="https://github.com/hdxw/hexo-theme-prowiki" target="_blank">ProWiki</a>
+            &copy;2025 t1ng<br>
+            <a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/"></a>
+            <div style="height: 50px;"></div>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/custom.js"></script>
+
+
+    <script>onload_content();</script>
+
+</body>
+</html>
