@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>第一章 应急响应- Linux入侵排查 | T1ng的摆烂日常</title>
+    
+    
+        <meta property="og:site_name" content="T1ng的摆烂日常">
+    
+    
+        <meta property="article:author" content="T1ng">
+    
+    
+        <link rel="icon" href="/img/t1ng.ico">
+    
+    
+<link rel="stylesheet" href="/css/minireset.min.css">
+
+    
+<link rel="stylesheet" href="/css/all.min.css">
+
+    
+<link rel="stylesheet" href="/css/csshake.min.css">
+
+    
+<link rel="stylesheet" href="/css/hljs/lioshi.css">
+
+    
+<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+
+    
+<link rel="stylesheet" href="/styl/main.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/highlight.min.js"></script>
+
+    
+<script src="/js/jquery.fancybox.min.js"></script>
+
+    
+<script src="/js/clipboard.min.js"></script>
+
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <header>
+  <div class="outer">
+    <div class="inner">
+      <h1 class="logo-wrap">
+        <a>T1ng的摆烂日常<b><sup></sup></b></a>
+      </h1>
+    </div>
+    <div class="inner">
+      <nav class="main-nav">
+        
+          
+            <a href="/">首页</a>
+          
+        
+          
+            <a href="/archives">归档</a>
+          
+        
+          
+            <a href="/categories">分类</a>
+          
+        
+          
+            <a href="/tags">标签</a>
+          
+        
+          
+            <a href="/friends">友链</a>
+          
+        
+          
+            <div class="dropdown">
+              <a class="dropbtn">相关链接</a>
+              <div class="dropdown-content">
+                
+              </div>
+            </div>
+          
+        
+          
+            <a href="/about">关于</a>
+          
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="content">
+        <section class="outer">
+    <article>
+        <div class="article-title">
+    <h2>
+        <a href="/2025/03/01/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-Linux%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5/" class="shake shake-little" title="第一章 应急响应- Linux入侵排查">
+            
+            第一章 应急响应- Linux入侵排查
+        </a>
+    </h2>
+    <div class="meta_box">
+    
+        
+        
+            
+                
+        
+        <div class="meta meta_auth">
+            <img src="/img/t1ng.png" alt="head" />
+            <p>t1ng</p>
+        </div>
+    
+        
+        
+        <div class="meta meta_date">
+            <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+            <p>发布于：2025年03月01日</p>
+        </div>
+    
+        <div class="meta meta_update">
+            <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+            <p>更新于：2025年03月01日</p>
+        </div>
+    </div>
+    
+  <div class="post_tags">
+    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%84%E6%9C%BA/" rel="tag"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>玄机</a></li></ul>
+  </div>
+
+
+</div>
+
+        <hr>
+        <div class="article-entry">
+            
+            
+            
+            <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">账号：root 密码：linuxruqin</span><br><span class="line">ssh root@IP</span><br><span class="line">1.web目录存在木马，请找到木马的密码提交</span><br><span class="line">2.服务器疑似存在不死马，请找到不死马的密码提交</span><br><span class="line">3.不死马是通过哪个文件生成的，请提交文件名</span><br><span class="line">4.黑客留下了木马文件，请找出黑客的服务器ip提交</span><br><span class="line">5.黑客留下了木马文件，请找出黑客服务器开启的监端口提交</span><br></pre></td></tr></table></figure>
+
+<p>进入<code>/var/www/html</code>目录，列出文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www/html &amp;&amp; ls -lah</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/01/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-Linux%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5/a73a3e5022c968b41f1336548bf048d1.png"><br>看到<code>1.php</code>，直接读取查看<br><img src="/2025/03/01/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-Linux%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5/fd5e702232124705e63f77532e700865.png"><br>木马。密码为<code>1</code><br>第一问：flag{1}</p>
+<p>寻找不死马密码，<code>grep</code>和<code>find</code>分别对<code>.php</code>文件中的<code>eval</code>函数进行查找</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name &quot;*.php&quot; | xargs grep &quot;eval&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/01/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-Linux%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5/76530a486e40307d8facc014b52443cf.png"><br>发现存在在<code>shell.php</code>文件中，使用了md5进行加密，<br><a target="_blank" rel="noopener" href="https://www.cmd5.com/default.aspx">md5在线解密破解,md5解密加密</a><br><img src="/2025/03/01/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-Linux%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5/757ff86dea6ab0917b264d492dd3b98d.png"><br>第二问：flag{hello}</p>
+<p>判断生成不死马的文件，发现<code>index.php</code>文件有<code>$code</code>函数，生成不死马<br>第三问：flag{index.php}</p>
+<p>找出木马ip，Linux下一般的木马后缀为<code>.elf</code>文件，在一开始的时候，该路径下有一个<code>shell(1).elf</code>文件，sftp传回本地，上传到微步云沙盒中分析<br><img src="/2025/03/01/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-Linux%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5/d5052413b65ff71d0a855bdc947e2698.png"><br>拿到ip<br>第四问：flag{10.11.55.21}</p>
+<p>给与样本权限，然后打开另一个终端，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">screen -S 1</span><br><span class="line">1</span><br><span class="line">chmod 777 &#x27;chmod(1).elf&#x27;</span><br><span class="line">ctrl+a+d</span><br><span class="line"></span><br><span class="line">netstat -antlp | more</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/01/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-Linux%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5/4605098c1267a005b7fe35fd6b1341a9.png"><br>恶意ip开启的端口为3333<br>第五问：flag{3333}</p>
+
+            <div class="article-copyright">
+                
+
+            </div>
+        </div>
+    </article>
+    
+
+
+</section>
+    </div>
+    <footer>
+    <div class="outer">
+        <div class="inner">
+            Powered by <a href="https://github.com/hdxw/hexo-theme-prowiki" target="_blank">ProWiki</a>
+            &copy;2025 t1ng<br>
+            <a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/"></a>
+            <div style="height: 50px;"></div>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/custom.js"></script>
+
+
+    <script>onload_content();</script>
+
+</body>
+</html>
