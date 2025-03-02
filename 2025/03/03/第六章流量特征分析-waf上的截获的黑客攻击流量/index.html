@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>第六章 流量特征分析-waf 上的截获的黑客攻击流量 | T1ng的摆烂日常</title>
+    
+    
+        <meta property="og:site_name" content="T1ng的摆烂日常">
+    
+    
+        <meta property="article:author" content="T1ng">
+    
+    
+        <link rel="icon" href="/img/t1ng.ico">
+    
+    
+<link rel="stylesheet" href="/css/minireset.min.css">
+
+    
+<link rel="stylesheet" href="/css/all.min.css">
+
+    
+<link rel="stylesheet" href="/css/csshake.min.css">
+
+    
+<link rel="stylesheet" href="/css/hljs/lioshi.css">
+
+    
+<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+
+    
+<link rel="stylesheet" href="/styl/main.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/highlight.min.js"></script>
+
+    
+<script src="/js/jquery.fancybox.min.js"></script>
+
+    
+<script src="/js/clipboard.min.js"></script>
+
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <header>
+  <div class="outer">
+    <div class="inner">
+      <h1 class="logo-wrap">
+        <a>T1ng的摆烂日常<b><sup></sup></b></a>
+      </h1>
+    </div>
+    <div class="inner">
+      <nav class="main-nav">
+        
+          
+            <a href="/">首页</a>
+          
+        
+          
+            <a href="/archives">归档</a>
+          
+        
+          
+            <a href="/categories">分类</a>
+          
+        
+          
+            <a href="/tags">标签</a>
+          
+        
+          
+            <a href="/friends">友链</a>
+          
+        
+          
+            <div class="dropdown">
+              <a class="dropbtn">相关链接</a>
+              <div class="dropdown-content">
+                
+              </div>
+            </div>
+          
+        
+          
+            <a href="/about">关于</a>
+          
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="content">
+        <section class="outer">
+    <article>
+        <div class="article-title">
+    <h2>
+        <a href="/2025/03/03/%E7%AC%AC%E5%85%AD%E7%AB%A0%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90-waf%E4%B8%8A%E7%9A%84%E6%88%AA%E8%8E%B7%E7%9A%84%E9%BB%91%E5%AE%A2%E6%94%BB%E5%87%BB%E6%B5%81%E9%87%8F/" class="shake shake-little" title="第六章 流量特征分析-waf 上的截获的黑客攻击流量">
+            
+            第六章 流量特征分析-waf 上的截获的黑客攻击流量
+        </a>
+    </h2>
+    <div class="meta_box">
+    
+        
+        
+            
+                
+        
+        <div class="meta meta_auth">
+            <img src="/img/t1ng.png" alt="head" />
+            <p>t1ng</p>
+        </div>
+    
+        
+        
+        <div class="meta meta_date">
+            <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+            <p>发布于：2025年03月03日</p>
+        </div>
+    
+        <div class="meta meta_update">
+            <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+            <p>更新于：2025年03月03日</p>
+        </div>
+    </div>
+    
+  <div class="post_tags">
+    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%84%E6%9C%BA/" rel="tag"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>玄机</a></li></ul>
+  </div>
+
+
+</div>
+
+        <hr>
+        <div class="article-entry">
+            
+            
+            
+            <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.黑客成功登录系统的密码 flag&#123;xxxxxxxxxxxxxxx&#125;</span><br><span class="line">2.黑客发现的关键字符串 flag&#123;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#125;</span><br><span class="line">3.黑客找到的数据库密码 flag&#123;xxxxxxxxxxxxxxxx&#125;</span><br></pre></td></tr></table></figure>
+
+<p>成功登录，通常会发送带有认证信息的http请求，用<code>POST</code>筛选一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http.request.method == &quot;POST&quot;</span><br></pre></td></tr></table></figure>
+
+<p>找&#x2F;admin&#x2F;login.php?rec&#x3D;login，直接按照时间倒叙去寻找<br><img src="/2025/03/03/%E7%AC%AC%E5%85%AD%E7%AB%A0%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90-waf%E4%B8%8A%E7%9A%84%E6%88%AA%E8%8E%B7%E7%9A%84%E9%BB%91%E5%AE%A2%E6%94%BB%E5%87%BB%E6%B5%81%E9%87%8F/4324678cc849348314a5b90a01219917.png"></p>
+<p>第一问：flag{admin!@#pass123}</p>
+<p>查找一下含有关键字<code>flag</code>的包。并且返回值为<code>200</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http contains &quot;flag&quot;</span><br></pre></td></tr></table></figure>
+
+<p>翻了一遍，还是按照时间排序，从大的开始找，192.168.94.59和192.168.32.189的请求报文和回显报文，多看回显<br><img src="/2025/03/03/%E7%AC%AC%E5%85%AD%E7%AB%A0%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90-waf%E4%B8%8A%E7%9A%84%E6%88%AA%E8%8E%B7%E7%9A%84%E9%BB%91%E5%AE%A2%E6%94%BB%E5%87%BB%E6%B5%81%E9%87%8F/302bd0daa6b8901e7d5d0c816cc9daf5.png"><br>第二问：flag{87b7cb79481f317bde90c116cf36084b}</p>
+<p>顺着第二问，过滤http，在No.734555和No.734560有POST a.php，猜测应该是webshell，操作都是按照顺序来的，找找No附近的<br><img src="/2025/03/03/%E7%AC%AC%E5%85%AD%E7%AB%A0%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90-waf%E4%B8%8A%E7%9A%84%E6%88%AA%E8%8E%B7%E7%9A%84%E9%BB%91%E5%AE%A2%E6%94%BB%E5%87%BB%E6%B5%81%E9%87%8F/3efe6a74d217bf7df9f92d704237b22b.png"><br>第三问：flag{e667jUPvJjXHvEUv}</p>
+
+            <div class="article-copyright">
+                
+
+            </div>
+        </div>
+    </article>
+    
+
+
+</section>
+    </div>
+    <footer>
+    <div class="outer">
+        <div class="inner">
+            Powered by <a href="https://github.com/hdxw/hexo-theme-prowiki" target="_blank">ProWiki</a>
+            &copy;2025 t1ng<br>
+            <a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/"></a>
+            <div style="height: 50px;"></div>
+
+            <!-- 不蒜子统计信息 -->
+            <div id="busuanzi_container">
+                <span id="busuanzi_value_site_uv"></span> 访客 | 
+                <span id="busuanzi_value_site_pv"></span> 访问量
+            </div>
+
+            <!-- 不蒜子脚本 -->
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/custom.js"></script>
+
+
+    <script>onload_content();</script>
+
+</body>
+</html>
