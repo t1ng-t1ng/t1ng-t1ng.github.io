@@ -6,7 +6,7 @@
 # FixIt 0.2.15 | CHANGED FixIt theme version
 version = "0.3.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
 # site description
-description = "T1ng Blog"
+description = "T1ng‘s Blog"
 # site keywords
 keywords = ["Hugo", "FixIt"]
 # site default theme ["light", "dark", "auto"]
