@@ -43,7 +43,7 @@ disableThemeInject = false
   name = "T1ng"
   email = "2564767047@qq.com"
   link = "https://t1ng-t1ng.github.io/"
-  avatar = "images/avatar.png"
+  avatar = "/images/avatar.png"
 
 # FixIt 0.3.0 | NEW public Git repository information only then enableGitInfo is true
 [gitInfo]
@@ -173,7 +173,7 @@ disableThemeInject = false
     animate = true
     icon = "fa-solid fa-heartbeat"
     pre = "本站运行时间"
-    value = "2025-03-13T08:22:05.951Z" # e.g. "2021-12-18T16:15:22+08:00"
+    value = "2025-03-10T00:00:00+08：00" # e.g. "2021-12-18T16:15:22+08:00"
   # FixIt 0.2.17 | NEW footer lines order, optional values: ["first", 0, 1, 2, 3, 4, 5, "last"]
   [footer.order]
     powered = 0
