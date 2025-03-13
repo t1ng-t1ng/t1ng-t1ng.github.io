@@ -245,7 +245,7 @@ disableThemeInject = false
     # title shown in home page (HTML format is supported)
     title = "T1ng"
     # subtitle shown in home page (HTML format is supported)
-    subtitle = "世事喧嚣没眼看"
+    subtitle = "世事喧嚣"
     # whether to use typeit animation for subtitle
     typeit = true
     # whether to show social links
@@ -511,7 +511,7 @@ disableThemeInject = false
 
 # FixIt 0.2.16 | NEW Reading progress bar
 [readingProgress]
-  enable = false
+  enable = true
   # Available values: ["left", "right"]
   start = "left"
   # Available values: ["top", "bottom"]
@@ -707,7 +707,7 @@ disableThemeInject = false
   [page.cacheRemoteImages]
     enable = false
     # replace remote image url with local image url (place in public/images/remote/)
-    replace = false
+    replace = true
   # FixIt 0.3.0 | NEW Related content config (https://gohugo.io/content-management/related/)
   [page.related]
     enable = false
@@ -729,7 +729,7 @@ disableThemeInject = false
   # social share links in post page
   [page.share]
     enable = true
-    Twitter = true
+    X = true
     Facebook = true
     Linkedin = false
     Whatsapp = false
