@@ -43,7 +43,7 @@ disableThemeInject = false
   name = "T1ng"
   email = "2564767047@qq.com"
   link = "https://t1ng-t1ng.github.io/"
-  avatar = "/images/avatar.jpg"
+  avatar = "/images/avater.jpg"
 
 # FixIt 0.3.0 | NEW public Git repository information only then enableGitInfo is true
 [gitInfo]
@@ -119,7 +119,7 @@ disableThemeInject = false
     # title name
     name = "T1ng's Blog"
     # you can add extra information before the name (HTML format is supported), such as icons
-    pre = '<i class="fa-solid fa-meteor"></i>'
+    pre = '<i class="fa-solid fa-heart"></i>'
     # you can add extra information after the name (HTML format is supported), such as icons
     post = ""
     # whether to use typeit animation for title name
