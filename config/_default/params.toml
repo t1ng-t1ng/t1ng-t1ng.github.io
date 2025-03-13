@@ -169,7 +169,7 @@ disableThemeInject = false
     themeLogo = true
   # FixIt 0.2.17 | CHANGED Site creation time
   [footer.siteTime]
-    enable = ture
+    enable = true
     animate = true
     icon = "fa-solid fa-heartbeat"
     pre = "本站运行时间"
