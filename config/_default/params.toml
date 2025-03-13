@@ -43,7 +43,7 @@ disableThemeInject = false
   name = "T1ng"
   email = "2564767047@qq.com"
   link = "https://t1ng-t1ng.github.io/"
-  avatar = "/images/avater.png"
+  avatar = ""
 
 # FixIt 0.3.0 | NEW public Git repository information only then enableGitInfo is true
 [gitInfo]
@@ -115,7 +115,7 @@ disableThemeInject = false
   # Header title config
   [header.title]
     # URL of the LOGO
-    logo = "/images/arrow-through-heart.min.svg"
+    logo = "/images/fixit.min.svg"
     # title name
     name = ""
     # you can add extra information before the name (HTML format is supported), such as icons
