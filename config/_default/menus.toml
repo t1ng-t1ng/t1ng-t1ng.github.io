@@ -37,6 +37,17 @@
   [main.params]
     icon = "fa-solid fa-folder-tree"
 [[main]]
+  identifier = "friends"
+  parent = ""
+  pre = ""
+  post = ""
+  name = "Friends"
+  url = "/friends/"
+  title = ""
+  weight = 2
+  [main.params]
+    icon = "fa-solid fa-users fa-fw fa-sm"
+[[main]]
   identifier = "tags"
   parent = ""
   pre = ""
