@@ -1,12 +1,61 @@
+---
+title: 2024铁人三项决赛CTFMISC-BlindFlowanalyis
+subtitle:
+date: 2025-03-14T14:49:54+08:00
+slug: 02800ce
+draft: false
+author:
+  name: T1ng
+  link:
+  email:
+  avatar: /images/avater.jpg
+description:
+keywords:
+license:
+comment: false
+weight: 0
+tags:
+  - 玄机
+categories:
+  - 玄机
+hiddenFromHomePage: false
+hiddenFromSearch: false
+hiddenFromRelated: false
+hiddenFromFeed: false
+summary:
+resources:
+  - name: featured-image
+    src: featured-image.jpg
+  - name: featured-image-preview
+    src: featured-image-preview.jpg
+toc: true
+math: false
+lightgallery: false
+password:
+message:
+repost:
+  enable: true
+  url:
+
+# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
+---
+
+<!--more-->
+
+<!-- Place resource files in the current article directory and reference them using relative paths, like this: `![alt](images/screenshot.jpg)`. -->
+
 先分析`webflow1.pcap`，大致翻了一下，过滤一下`http`，发现`Length Info`内有`select`，猜测攻击方式为SQL注入
 直接过滤含有`select`的流量即可
 ![](images/51f8c9751284f164ee290de77303a52f.png)
+
 ```
 http && http contains "select"
 ```
+
 追踪http流，
 ![](images/2d6dfcbb66e1062d4ac051fd8d245a0c.png)
 发现在最后有admin的密钥，提取出来
+
 ```
 admin
 
@@ -23,15 +72,18 @@ MTTC3TBXBgkqhkiG9w0BBQ0wSjApBgkqhkiG9w0BBQwwHAQIVLQmLXnlUYkCAggAMAwGCCqGSIb3DQIJ
 
 -----END ENCRYPTED PRIVATE KEY-----
 ```
+
 此时的`PRIVATE KEY`格式并不正确，需要把`MTTC`替换成`MIIC`，格式才正确
 再去分析`webflow2.pcap`，同样的也是SQL注入，过滤条件一样
 ![](images/3b8cf0666b05d7a03075bffff8d60474.png)
 追踪http流，发现admin的数据
+
 ```
 MDgnetOpihRoTmbreC2P7EQqkmeHloAWQ0SA2gKuHWPUP3u8u81ewsTnlyhvc7qL
 MMpVl36M9Z0Hu++yIKt2C/mimOFH04ixQAUo5y8h8vajw7vRLwfhpxC+pSjWvxjP
 2ieWVgdmXraijq92K6vdXod/SVaOyBT/1/asqhq1abQ=
 ```
+
 并拿到了提示
 ![](images/f6622b64ec8d2c38e30fdba8c193e27c.png)
 尝试了`rockyou`字典爆破，但是好像并没有用，找不到字典，借鉴一下师傅的脚本
