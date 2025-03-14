@@ -58,3 +58,14 @@
   weight = 3
   [main.params]
     icon = "fa-solid fa-tags"
+[[main]]
+  identifier = "about"
+  parent = ""
+  pre = ""
+  post = ""
+  name = "About"
+  url = "/about/"
+  title = ""
+  weight = 3
+  [main.params]
+    icon = "fa-regular fa-id-card fa-fw fa-sm fa-fw fa-sm"
