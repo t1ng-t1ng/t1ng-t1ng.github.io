@@ -44,7 +44,7 @@
   name = "Friends"
   url = "/friends/"
   title = ""
-  weight = 2
+  weight = 4
   [main.params]
     icon = "fa-solid fa-users fa-fw fa-sm"
 [[main]]
@@ -66,6 +66,6 @@
   name = "About"
   url = "/about/"
   title = ""
-  weight = 3
+  weight = 5
   [main.params]
     icon = "fa-regular fa-id-card fa-fw fa-sm fa-fw fa-sm"
