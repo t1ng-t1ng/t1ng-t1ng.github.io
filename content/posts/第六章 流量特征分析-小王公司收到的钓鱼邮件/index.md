@@ -53,19 +53,32 @@ repost:
 ```
 
 打开文件过滤`http`
+
 ![](images/7ec2543d240be4e76539382053c2fc59.png)
+
 第一问：flag{tsdandassociates.co.sz/w0ks//?YO=1702920835}
 
 还是追踪http，
+
 ![](images/931cce8721239d9636a2cf95a07cc35a.png)
+
 典型的zip压缩包开头，导出
+
 ![](images/ce1eaa00a367aa7513b91a35a1dd6e9f.png)
+
+
+
 ![](images/bbf677197b9b6bf48a4fdccaa191983f.png)
+
 第二问 ：flag{F17DC5B1C30C512137E62993D1DF9B2F}
 
 加载js文件
+
 ![](images/f41c8f49d5105aa4fecebc1eac01df21.png)
+
 发现大量注释，发现`o457607380`参数后面的就是域名
+
 ![](images/b13f9d083829155b33950faa7a5f0759.png)
+
 查找拼接一下
 第三问：flag{shakyastatuestrade.com}

@@ -69,19 +69,26 @@ cat /var/log/redis.log
 ```
 
 发现总共就3个ip，`MASTER <-> REPLICA`发现进行了主从复制攻击，`192.168.100.13`进行攻击但是失败了，而`192.168.31.55`没有明显的恶意行为
+
 ![](images/5de30429485ef787cd4a73fd15f322bd.png)
+
 所以，恶意ip判断为`192.168.100.20`
 第一问：flag{192.168.100.20}
 
 上传恶意文件，第一问查看了内容，可以直接去审一下日志
+
 ![](images/bd9846871d2ac316bc629d7f9abf958d.png)
+
 发现了上传的文件为`exp.so`，flag应该藏在文件里面，转字符串查找一下`flag`
 
 ```
 strings /exp.so | grep "flag"
 ```
 
+
+
 ![](images/7ac94622ac5e0367e1194250f9795a8a.png)
+
 第二问： flag{XJ_78f012d7-42fc-49a8-8a8c-e74c87ea109b}
 
 继续查看，发现那段特殊的日志
@@ -108,17 +115,28 @@ crontab -l
 ```
 
 第一问我们知道`192.168.100.20`是黑客ip，推测为反弹shell的ip
+
 ![](images/878a9a3ee111ccfdcbf497ee481e1082.png)
+
 第三问：flag{192.168.100.13}
 
 通常SSH的验证分为密码验证和公钥验证
 先查看一下`.ssh`里面都是有什么，
+
 ![](images/6159a8af18254b1b69b0a95484e12c06.png)
+
 看到密钥文件有个奇怪的字符串`xj-test-user`，搜索一下
+
 ![](images/4fa16c61a0fb0ed0400023ebbb4cd98d.png)
+
+
+
 ![](images/f3c6a15f121415c58dd6ec18d43c4d69.png)
+
 查看拿到后半段
+
 ![](images/4b7db6341a03ebe8b4461fc8b2032577.png)
+
 第四问：flag{xj-test-user-wow-you-find-flag}
 
 让我们查看篡改的命令，查找最新更改的几个文件
@@ -127,12 +145,18 @@ crontab -l
 ls -lt --time=ctime /usr/bin | head -n 10
 ```
 
+
+
 ![](images/cc322490fd1113b1b0748bcace212256.png)
+
 发现`ps`的权限为777，不正常，查看一下
 
 ```
 cat /usr/bin/ps
 ```
 
+
+
 ![](images/0ba0267630c0b78a22d0f8711bc71e2d.png)
+
 第五问：flag{c195i2923381905517d818e313792d196}

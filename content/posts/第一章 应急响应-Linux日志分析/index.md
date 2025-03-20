@@ -73,7 +73,10 @@ cd /avr/log
 ls -l
 ```
 
+
+
 ![](images/aa93437f8ad51b6c5d06e19cf84e7289.png)
+
 第一个任务：查找爆破SSH的IP，所以我们需要分析auth日志，判断爆破的账号为root，且多次失败，会出现`Failed password for root`
 
 ```
@@ -84,7 +87,9 @@ cat /var/log/auth.log /var/log/auth.log.1 | grep -a "Failed password for root" |
 `sort`对提取出的ip进行排序。
 `uniq -c`排序后的ip去重。
 `sort -nr`从大到小排序（n按数字大小排序，r代表逆序）
+
 ![](images/d35521cd6637cd8e0136362e8965c386.png)
+
 1：flag{192.168.200.2,192.168.200.31,192.168.200.32}
 
 第二个任务：查找爆破成功的ip。依旧是auth日志，只不过成功时会回显`Accept`
@@ -93,7 +98,10 @@ cat /var/log/auth.log /var/log/auth.log.1 | grep -a "Failed password for root" |
 cat /var/log/auth.log /var/log/auth.log.1 | grep -a "Accept" | awk '{print $11}' | sort | uniq -c |sort -nr
 ```
 
+
+
 ![](images/6b46aaf58995bf585f22a27624b61564.png)
+
 下面是自己登陆的ip，
 2：flag{192.168.200.2}
 
@@ -105,12 +113,16 @@ cat auth.log.1|grep -a "Failed password"| grep -o 'for .* from'|sort -nr|uniq -c
 ```
 
 `grep -o 'for .* from'`筛选包括`for ... from`的部分
+
 ![](images/5abb4434bdd0c4416000509b013a6462.png)
+
 3：flag{user,hello,root,test3,test2,test1}
 
 第四个任务：查找爆破次数
 也就是`192.168.200.2`被爆破了多少次，第一问时就得到了答案
+
 ![](images/f94e277138d75a3c8702098878c0a04f.png)
+
 4：flag{4}
 
 第五个任务：查找后门用户。
@@ -121,5 +133,7 @@ cat /etc/passwd
 ```
 
 找到不是系统命名的，且uid在`0~499`开外的
+
 ![](images/c2315446921cbfe8f501a1bd195ee38a.png)
+
 5：flag{test2}

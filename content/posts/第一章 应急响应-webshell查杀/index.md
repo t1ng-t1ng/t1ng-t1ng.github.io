@@ -66,16 +66,24 @@ find ./ -name "*.php" | xargs grep "eval"
 ```
 
 xargs命令通常与管道命令一起使用。例如，可以使用_find_命令查找文件，然后使用xargs将查找到的文件列表作为_rm_或其他命令的参数。
+
 ![](images/0fa1997e24682dec374fd848d022171f.png)
+
 发现所给的三个文件中都符合要求，逐个排查
+
 ![](images/4204d5540267a93314f360b10b9206ca.png)
+
 在gz.php中找到了第一问flag
 1：flag{027ccd04-5065-48b6-a32d-77c704a5e26d}
 还是这个文件，其中有一个key值
+
 ![](images/e25778c19b15f3a48605b282108c8a2b.png)
+
 具体代表什么不清楚，尝试进行搜索
+
 ![](images/adcf48b5aa32511ccd38726464ee62da.png)
-发现是哥斯拉，所以找到哥斯拉在github的地址（[BeichenDream/Godzilla: 哥斯拉](https://github.com/BeichenDream/Godzilla)）进行md5得到第二问结果
+
+发现是哥斯拉，所以找到哥斯拉在github的地址（[BeichenDream/Godzilla: 哥斯拉](https://github.com/BeichenDream/Godzilla))进行md5得到第二问结果
 
 ```
 echo -n "https://github.com/BeichenDream/Godzilla" |md5sum |cut -d " " -f1
@@ -83,7 +91,9 @@ echo -n "https://github.com/BeichenDream/Godzilla" |md5sum |cut -d " " -f1
 
 2：flag{39392de3218c333f794befef07ac9257}
 接下来继续分析剩下的可疑文件，
+
 ![](images/5d337ffd3267617fa14d315dedcbdd6c.png)
+
 发现在`ls`时，`.Mysqli.php`文件并没有显示，`ls -lah`命令显示出了隐藏文件。所以隐藏的Shell的路径为`/var/www/html/include/Db/.Mysqli.php`
 
 ```
@@ -98,7 +108,10 @@ echo -n "/var/www/html/include/Db/.Mysqli.php" |md5sum |cut -d " " -f1
 find ./ -name "*.php" | xargs grep "base64"
 ```
 
+
+
 ![](images/029ce49952797a1b5d469506cbee1e8b.png)
+
 根据路径，md5，拿到flag
 
 ```

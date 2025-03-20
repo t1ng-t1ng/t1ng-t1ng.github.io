@@ -64,17 +64,31 @@ find ./ -name "*.php" | xargs grep "eval"
 发现sh.php文件，cat查看一下
 
 ![](images/51ff147b944eb8a82aeb1861fca0281f.png)
+
 第一问：flag{ccfda79e-7aa1-4275-bc26-a6189eb9a20b}
 
 进入`/var/log/mysql`位置，
 
+
+
 ![](images/bc11bfb58613e0263d53bc970771ecc7.png)
+
+
+
 发现只有一个错误文件，查看一下
 
+
+
 ![](images/3b1b782347e6c39b8b19d9915da9b823.png)
+
 发现在`/tmp`目录下还有一个`1.sh`文件，切换到`/tmp`目录查看一下
 
+
+
 ![](images/beecca32f51555aad9cee9e1854ee1ed.png)
+
+
+
 找到了反弹shell的ip地址
 第二问：flag{192.168.100.13}
 
@@ -86,7 +100,9 @@ find ./ -name "*.php" | xargs grep "root"
 
 
 
-![](images/a5b57034955037ee97fd12e25ed6581f.png)连接数据库
+![](images/a5b57034955037ee97fd12e25ed6581f.png)
+
+连接数据库
 
 ```
 mysql -uroot -p334cc35b3c704593
@@ -102,9 +118,14 @@ show global variables like 'secure_file_priv';
 
 ![](images/da31f11f3dbc2e9c7e327c50c416e275.png)
 
+
+
 确认是UDF提权，UDF提权会在`/usr/lib/mysql/plugin`位置留下`def.so`文件，检查一下是否有
 
+
+
 ![](images/221804ac859288709b9681d2883ac7f7.png)
+
 得到完整路径，计算一下md5
 
 ```
@@ -116,7 +137,11 @@ echo -n '/usr/lib/mysql/plugin/udf.so' | md5sum
 黑客进行了提权会写入自定义函数，再使用自定义函数进行命令执行，可知获得的权限
 由上面的`error.log`日志可知，写入了`mysql.func`中
 
+
+
 ![](images/2b476604a835475455f21efa71c9f507.png)
+
+
 
 ```
 mysql -uroot -p334cc35b3c704593
@@ -127,4 +152,5 @@ select sys_eval('whoami');
 
 
 ![](images/365782e312009c879e556316fb5df84d.png)
+
 第四问：flag{mysql}

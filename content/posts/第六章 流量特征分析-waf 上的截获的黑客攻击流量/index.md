@@ -56,7 +56,10 @@ repost:
 !(http contains "您输入的账号信息不正确") && http.request.method == "POST" && http.request.uri contains "/admin/login.php?rec=login"
 ```
 
+
+
 ![](images/f2ee7c03ad0e7debe835653565f7ca1d.png)
+
 第一问：flag{admin!@#pass123}
 
 查找一下含有关键字`flag`的包。并且返回值为`200`
@@ -66,7 +69,9 @@ http contains "flag"
 ```
 
 翻了一遍，还是按照时间排序，从大的开始找，192.168.94.59和192.168.32.189的请求报文和回显报文
+
 ![](images/f2ee7c03ad0e7debe835653565f7ca1d.png)
+
 第二问：flag{87b7cb79481f317bde90c116cf36084b}
 
 顺着第二问，过滤http，在No.734555和No.734560有POST a.php，猜测应该是webshell，让我们查找数据库的密码，直接过滤包含`database`参数，而且访问返回值是成功的
@@ -75,5 +80,8 @@ http contains "flag"
 http contains "database" && http contains "200"
 ```
 
+
+
 ![](images/826a2b500ab863c44849e683f6460d31.png)
+
 第三问：flag{e667jUPvJjXHvEUv}
