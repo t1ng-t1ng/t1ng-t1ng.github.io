@@ -68,6 +68,8 @@ Apache分为两种类型：
 cut -d- -f 1 access.log.1 | uniq -c | sort -rn
 ```
 
+
+
 ![](images/6ab46287d4f4dff1fa7c7e41b3cce193.png)
 第一问：flag{192.168.200.2}
 
@@ -81,12 +83,16 @@ cut -d- -f 1 access.log.1 | uniq -c | sort -rn
 cat access.log.1 | grep 192.168.200.2
 ```
 
+
+
 ![](images/fd1c1e11711f79919e34d60425cd3d03.png)
 md5加密一下
 
 ```
 echo -n "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" | md5sum
 ```
+
+
 
 ![](images/2e5e05f33f9ba5c1e11f373304ee80e8.png)
 第二问：flag{2d6330f380f44ac20f3a02eed0958f66}
@@ -114,6 +120,8 @@ cat access.log.1 | grep "192.168.200.2" | wc -l
 cat access.log.1 | grep "03/Aug/2023:08:" | awk '{print $1}' | sort -nr| uniq -c
 cat access.log.1 | grep "03/Aug/2023:08:" | awk '{print $1}' | sort -nr| uniq -c | wc -l
 ```
+
+
 
 ![](images/78ceb08cc345b0bb4164bbd25de8cc48.png)
 第五问：flag{5}
