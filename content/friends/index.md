@@ -19,28 +19,12 @@ comment: false
 
 ## Base info
 
-- nickname: Lruihao
-- avatar: https://lruihao.cn/images/avatar.jpg
-- url: https://lruihao.cn
-- description: Lruihao's Note
+- nickname: T1ng
 
-## Friendly Reminder
+- avatar: https://t1ng-t1ng.github.io/images/avater.jpg
 
-Comment like this:
+- url: https://t1ng-t1ng.github.io
 
-````markdown
-```yaml
-- nickname: <your nickname>
-  avatar: <your avatar>
-  url: <your site link>
-  description: <description of your site>
-```
-````
+- description: 
 
-{{< admonition info "Notice" true >}}
-
-1. If you want to exchange link, please leave a comment as the above format. (personal non-commercial blogs / websites only)
-2. :(fa-solid fa-exclamation-triangle): Website failure, stop maintenance and improper content may be unlinked!
-3. Those websites that do not respect other people's labor achievements, reprint without source, or malicious acts, please do not come to exchange.
-
-{{< /admonition >}}
+  
