@@ -7,6 +7,8 @@ keywords: ""
 comment: false
 ---
 
+<img src="./../../static/images/avater.jpg" alt="Web && Misc" style="zoom: 25%;" />
+
 Web && Misc
 
-0xfff & g1P03n
+0xfff & F1ux

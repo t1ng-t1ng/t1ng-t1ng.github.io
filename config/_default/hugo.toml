@@ -3,7 +3,7 @@
 # See: https://gohugo.io/getting-started/configuration/
 # -------------------------------------------------------------------------------------
 
-title = "T1ngの摆烂日常"
+title = "T1ngの日常"
 baseURL = "https://example.org/"
 # theme = "FixIt"
 defaultContentLanguage = "en"
